@@ -1,0 +1,105 @@
+// Variables ___________________________________________________________________
+$toggleButtonWidth: $header-height !default
+$toggleButtonHeight: $header-height !default
+$buttonColor1: $mainClr !default
+$buttonColor2: $mainClrDark !default
+$listeningBoxColor: $mainClr !default
+$instructionColor: white !default
+
+#skitt-ui
+  display: block!important
+
+#skitt-ui.skitt-ui--hidden
+  display: none !important
+
+
+/* Theme styles */
+#skitt-ui
+  height: $toggleButtonHeight
+  display: block
+  background-color: $listeningBoxColor
+  z-index: 200
+  +border-radius(0)
+  position: fixed
+  top: 0
+  right: 0
+  border: none
+  cursor: default
+  font-family: 'Lato'
+  font-weight: 300
+  font-size: 16px
+
+
+#skitt-toggle-button
+  width: $toggleButtonWidth
+  height: $toggleButtonHeight
+  +border-radius(0)
+  cursor: pointer
+  display: inline-block
+  background:
+    image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU4IDU4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1OCA1ODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSIxMjhweCIgaGVpZ2h0PSIxMjhweCI+CjxnPgoJPHBhdGggZD0iTTQ0LDI4Yy0wLjU1MiwwLTEsMC40NDctMSwxdjZjMCw3LjcyLTYuMjgsMTQtMTQsMTRzLTE0LTYuMjgtMTQtMTR2LTZjMC0wLjU1My0wLjQ0OC0xLTEtMXMtMSwwLjQ0Ny0xLDF2NiAgIGMwLDguNDg1LDYuNjQ0LDE1LjQyOSwxNSwxNS45NDlWNTZoLTVjLTAuNTUyLDAtMSwwLjQ0Ny0xLDFzMC40NDgsMSwxLDFoMTJjMC41NTIsMCwxLTAuNDQ3LDEtMXMtMC40NDgtMS0xLTFoLTV2LTUuMDUxICAgYzguMzU2LTAuNTIsMTUtNy40NjUsMTUtMTUuOTQ5di02QzQ1LDI4LjQ0Nyw0NC41NTIsMjgsNDQsMjh6IiBmaWxsPSIjRkZGRkZGIi8+Cgk8cGF0aCBkPSJNMjksNDZjNi4wNjUsMCwxMS00LjkzNSwxMS0xMVYxMWMwLTYuMDY1LTQuOTM1LTExLTExLTExUzE4LDQuOTM1LDE4LDExdjI0QzE4LDQxLjA2NSwyMi45MzUsNDYsMjksNDZ6IE0yMCwxMSAgIGMwLTQuOTYzLDQuMDM4LTksOS05czksNC4wMzcsOSw5djI0YzAsNC45NjMtNC4wMzgsOS05LDlzLTktNC4wMzctOS05VjExeiIgZmlsbD0iI0ZGRkZGRiIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=)
+    size: 25px auto
+    position: center
+    repeat: no-repeat
+  float: left
+  border-left: 2px solid $mainClrDark
+
+
+label#skitt-toggle-button__label
+  display: none
+
+
+.skitt-ui--not-listening #skitt-toggle-button
+  background-color: $buttonColor1
+
+
+.skitt-ui--listening #skitt-toggle-button
+  -webkit-animation: listen_pulse 2s ease-out infinite
+
+
+@-webkit-keyframes "listen_pulse"
+  0%
+    background-color: $buttonColor1
+
+  50%
+    background-color: $buttonColor2
+
+  100%
+    background-color: $buttonColor1
+
+
+
+.skitt-ui--not-listening #skitt-toggle-button:hover
+  background-color: $buttonColor2
+
+.skitt-ui--listening #skitt-toggle-button:hover
+  background-color: $buttonColor2
+
+
+#skitt-listening-box
+  float: left
+  display: inline-block
+  line-height: $toggleButtonHeight
+  color: $instructionColor
+
+
+#skitt-listening-text
+  display: inline-block
+  overflow: hidden
+
+.skitt-ui--not-listening #skitt-listening-text
+  width: 0
+
+.skitt-ui--listening #skitt-listening-text
+  width: 100%
+  -webkit-transition: width 1s ease-in-out
+  margin: 0 $toggleButtonWidth/2 0 15px
+
+
+#skitt-listening-text__samples
+  font-weight: bold
+  margin-left: 10px
+
+
+#skitt-listening-text__recognized-sentence
+  display: none

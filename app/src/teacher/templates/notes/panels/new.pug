@@ -1,0 +1,23 @@
+.panel.up(data-title="{{ 'new' | translate }}")
+
+  .fifty
+    .in_group(label="{{ 'date' | translate }}")
+      input(type='date', ng-model='$n.date', ng-value='today')
+    br
+    .in_group(label="{{ 'content' | translate }}")
+      textarea(draggable='false', rows='9', required='', ng-model='$n.text')
+
+  .fifty
+    p(translate='leave-blank-for-full-class')
+    .clear
+    multi-select(ng-model='$n.students',
+                 object-property='name',
+                 api-url='students-list',
+                 placeholder="{{'student'|translate}}...",
+                 suggestions-arr='')
+  .clear
+
+  .panel-footer
+    .btn.close(translate='save', ng-click='add()')
+
+  .discard-btn(ng-click='closePanel()')

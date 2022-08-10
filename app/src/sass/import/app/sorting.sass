@@ -1,0 +1,28 @@
+.sortReverse
+	float: right
+	width: 18px
+	height: 18px
+
+	background:
+		repeat: no-repeat
+		position: center
+		size: contain
+
+	border: 1px solid $mainClrDark
+	border-radius: 50px
+	margin: 10px 5px 0 0
+
+	cursor: pointer
+
+	&.select
+		background:
+			image: url(inline-image('img/arrowdown.gif'))
+			size: auto 16px
+
+		&:hover
+			background:
+				color: $mainClrDark
+				image: url(inline-image('img/arrowdown_white.gif'))
+
+	&.select.active
+		+rotate(180deg)

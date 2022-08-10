@@ -1,0 +1,30 @@
+panel(p-dir='meetings', p-name='info')
+
+section(ng-init="sort=['date',true]")
+  article
+    h1(translate='meetings')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      table.data_grid
+        tr
+          td.little
+            icn(n='calendar-o')
+          td.subject(translate='time')
+          td.little(translate='spaces')
+          td.subject(translate='booked')
+          td
+          td.little
+        tr(ng-repeat='meeting in data')
+          td.little.date
+            span(ng-bind="meeting.date | date: 'd'")
+            span(ng-bind="meeting.date | date: 'MMM'")
+          td.subject(ng-bind='meeting.time')
+          td.little(ng-bind='meeting.people')
+          td.subject
+            b(ng-bind='meeting.bookedCount')
+          td
+          td.little(ng-click='select(meeting);showPanel("info")')
+            .icon-btn(ng-class="{'grey': meeting.bookedCount == 0}")
+              tooltip(t='booked')
+              icn(n='list-ul')

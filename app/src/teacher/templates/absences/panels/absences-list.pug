@@ -1,0 +1,45 @@
+.panel.bigger.nopadding(data-title="{{'non-justified-absences' | translate}}")
+  .fullspace
+    .table_container
+      table.data_grid
+        tr
+          td.check
+            .checkbox
+              input#checkboxViewAll.selectAll(type='checkbox')
+              label(for='checkboxViewAll')
+          td.little
+            icn(n='calendar-o')
+          td.little
+            icn(n='clock-o')
+          td(translate='type')
+          td.little
+          td.little
+        tr(ng-repeat='absence in sel_student.absences',
+           ng-click='selectAbsence($index)')
+          td.check
+            .checkbox
+              input.selection(type='checkbox', rel='{{student.id}}',
+                              id='checkboxView{{$index}}')
+              label(for='checkboxView{{$index}}')
+          td.little.date
+            span(ng-bind="absence.date | date: 'dd'")
+            span(ng-bind="absence.date | date: 'MMM'")
+          td.little
+            span(ng-hide='!absence.type', ng-bind='absence.time')
+          td(translate='absence-type-{{absence.type}}')
+          td.little
+            .icon-btn.black.right.close(ng-click='showPanel("single-justify")')
+              tooltip(t='justify')
+              font(translate='justify-abbreviation')
+          td.little
+            .icon-btn.red.right.close(ng-click='panel = "remove"')
+              tooltip(t='remove')
+              | X
+  .panel-footer
+    .btn.close(ng-click='showPanel("remove-selected")',
+               translate='remove-selected')
+
+    .btn.red.close(ng-click='showPanel("multiple-justify")',
+                   translate='justify-selected')
+
+  .discard-btn(ng-click='closePanel()')

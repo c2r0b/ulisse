@@ -1,0 +1,19 @@
+.panel.nopadding(data-title="{{'booked' | translate}}")
+  .fullspace
+    .table_container
+      table.data_grid
+        tr
+          td.title
+            input(placeholder="{{ 'student' | translate }}", ng-model='query.name')
+            sort(by='name')
+          td
+            input(placeholder="{{ 'class' | translate }}", ng-model='query.class')
+            sort(by='class')
+        tr(ng-repeat="\
+        student in sel_data.booked\
+        | orderBy	:	sort[0] = 'name' : sort[1]\
+        | filter		:	query")
+          td.title(ng-bind='student.name')
+          td(ng-bind='student.class')
+  
+  .discard-btn(ng-click='closePanel()')

@@ -1,0 +1,12 @@
+.panel(data-title="{{ 'edit' | translate }}")
+
+  h2(translate='date')
+  input(type='date', ng-model='$e.date', ng-value='$e.date')
+
+  h2(translate='content')
+  textarea(draggable='false', rows='3', ng-model='$e.text')
+
+  .panel-footer
+    .btn.close(translate='save', ng-click='edit()')
+
+  .discard-btn(ng-click='closePanel()')

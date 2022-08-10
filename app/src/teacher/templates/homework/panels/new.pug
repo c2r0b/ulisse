@@ -1,0 +1,12 @@
+.panel(data-title="{{ 'new' | translate }}")
+
+  .in_group(label="{{ 'date' | translate }}")
+    input(type='date', ng-model='$n.date', ng-value='today')
+
+  .in_group(label="{{ 'content' | translate }}")
+    textarea(draggable='false', rows='3', ng-model='$n.text')
+
+  .panel-footer
+    .btn.close(translate='save', ng-click='add()')
+
+  .discard-btn(ng-click='closePanel()')

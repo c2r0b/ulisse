@@ -1,0 +1,14 @@
+.panel(data-title="{{ 'edit' | translate }}")
+  .fifty
+    .in_group(label="{{ 'name' | translate }}")
+      input(type='text', ng-model='$e.name')
+  .fifty
+    .in_group(label="{{ 'coordinator' | translate }}")
+      br
+      select(ng-model='$e.coordinator_id')
+        option(ng-repeat='teacher in data.teachers',
+               ng-value='teacher.id',
+               ng-selected='$e.coordinator_id == teacher.id',
+               ng-bind='teacher.name')
+  .panel-footer
+    .btn.close(translate='save', ng-click='edit()')

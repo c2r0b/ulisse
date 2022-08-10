@@ -1,0 +1,104 @@
+#info-bar(ng-bind='$e.name')
+
+panel(p-name='new', p-bar='false')
+panel(p-name='edit')
+confirm-removal(msg='del-class')
+
+panel(g-type='confirm',
+			p-name='rm-sel',
+			p-bar='false',
+			title='rm-sel',
+			msg='rm-sel-classes-msg',
+			callback='removeSelected()')
+
+panel(p-name='students')
+panel(p-name='add-student')
+
+panel(g-type='confirm',
+			p-name='remove-student',
+			title='remove',
+			msg='remove-student-from-class',
+			accept-panel='students',
+			deny-panel='students',
+			callback='removeStudent()')
+
+panel(p-name='subjects')
+panel(p-name='add-subject')
+panel(p-name='edit-subject')
+
+panel(g-type='confirm',
+			p-name='remove-subject',
+			title='remove',
+			msg='remove-subject-from-class',
+			accept-panel='subjects',
+			deny-panel='subjects',
+			callback='removeSubject()')
+
+section(ng-init="sort=['name',false]")
+  article
+    .right
+      .option-btn(data-panel='new', ng-click='clear()')
+        icn(n='plus')
+        span(translate='add')
+      .option-btn(data-panel='rm-sel')
+        icn(n='remove')
+        span(translate='rm-sel')
+    h1(translate='classes-subjects')
+  .container
+    no-data(ng-if='!!!data.classes.length')
+    article(ng-if='!!data.classes.length')
+      table.data_grid
+        tr
+          td.check
+            .checkbox
+              input#checkboxViewAll.selectAll(type='checkbox')
+              label(for='checkboxViewAll')
+          td.title
+            input(placeholder="{{ 'name' | translate }}",
+									ng-model='query.name')
+            sort(by='name')
+          td
+            input(placeholder="{{ 'coordinator' | translate }}",
+									ng-model='query.coordinator')
+            sort(by='coordinator')
+          td.little
+          td.little
+          td.little
+          td.little
+          td.little
+        tr(ng-repeat='\
+        class in data.classes\
+        | orderBy	: sort[0] : sort[1]\
+        | filter	:	query', ng-click='select(class)')
+          td.check
+            .checkbox
+              input.selection(type='checkbox',
+															rel='{{ class.id }}',
+															id='checkboxView{{$index}}')
+              label(for='checkboxView{{ $index }}')
+          td.title(ng-bind='class.name')
+          td(ng-bind='class.coordinator')
+          td.little
+            .icon-btn.green(ng-click='getSchedule(class)',
+														data-panel='schedule')
+              tooltip(t='schedule')
+              icn(n='calendar-o')
+          td.little
+            .icon-btn(ng-click='getClassInfo(class)',
+											data-panel='edit')
+              tooltip(t='edit')
+              icn(n='edit')
+          td.little
+            .icon-btn.black(ng-click='getStudents(class)',
+														data-panel='students')
+              tooltip(t='students')
+              icn(n='child')
+          td.little
+            .icon-btn.purple(ng-click='getSubjects(class); getSchoolTeachers()',
+														 data-panel='subjects')
+              tooltip(t='teachers-subjects')
+              icn(n='graduation-cap')
+          td.little
+            .icon-btn.red(data-panel='remove')
+              tooltip(t='remove')
+              | X

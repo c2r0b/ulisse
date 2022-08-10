@@ -1,0 +1,84 @@
+section
+  article
+    h1(translate='dashboard')
+  .container
+    article
+      .fifty
+        h2(translate='last-news')
+        table.data_grid
+          tr
+            td.little
+              icn(n='calendar-o')
+            td.subject(translate='title')
+            td
+          tr
+            td.little.date
+              span(ng-bind="data.news.date | date: 'd'")
+              span(ng-bind="data.news.date | date: 'MMM'")
+            td.subject(ng-bind='data.news.title')
+            td(ng-bind='data.news.content')
+        br
+        h2(translate='next-booked-meeting')
+        table.data_grid
+          tr
+            td.little
+              icn(n='calendar-o')
+            td.subject(translate='time')
+            td
+          tr
+            td.little.date
+              span(ng-bind="data.meeting.date | date: 'd'")
+              span(ng-bind="data.meeting.date | date: 'MMM'")
+            td.subject(ng-bind='data.meeting.time')
+            td(ng-bind='data.meeting.teacher')
+        br
+        h2(translate='last-mark')
+        table.data_grid
+          tr
+            td.little
+              icn(n='calendar-o')
+            td.subject(translate='class')
+            td.subject(translate='subject')
+            td
+          tr
+            td.little.date
+              span(ng-bind="data.mark.date | date: 'd'")
+              span(ng-bind="data.mark.date | date: 'MMM'")
+            td.subject(ng-bind='data.mark.class')
+            td.subject(ng-bind='data.mark.subject')
+            td
+              b(ng-bind='data.mark.mark | readableMark')
+      .fifty
+        h2(translate='absences')
+        table.list
+          tr
+            td(translate='last-absence')
+            td(ng-bind='data.absences.last')
+          tr
+            td(translate='non-justified-absences')
+            td(ng-bind='data.absences.non_justified')
+          tr
+            td(translate='absence-days')
+            td(ng-bind='data.absences.days')
+          tr
+            td(translate='entrances')
+            td(ng-bind='data.absences.entrances')
+          tr
+            td(translate='leavings')
+            td(ng-bind='data.absences.leavings')
+          tr
+            td(translate='delays')
+            td(ng-bind='data.info.delays')
+        br
+        h2(translate='more')
+        table.list
+          tr
+            td(translate='booked-meetings')
+            td(ng-bind='data.more.booked')
+          tr
+            td(translate='paid-taxes')
+            td(ng-bind='data.more.paid')
+          tr
+            td(translate='religion')
+            td(translate='religion-{{ data.info.religion }}')
+      .clear

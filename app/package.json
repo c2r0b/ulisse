@@ -1,0 +1,50 @@
+{
+  "name": "ulisse-web-app",
+  "version": "0.2.1",
+  "description": "Ulisse.school web management client",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lorenzo Ganni",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.23.6",
+    "compass-importer": "^0.4.1",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-angular-translate": "^0.1.4",
+    "gulp-bro": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-file": "^0.3.0",
+    "gulp-if": "^2.0.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-pug": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-util": "^3.0.7",
+    "node-font-awesome": "^1.0.2",
+    "php-built-in-server": "^0.1.4",
+    "pump": "^3.0.0",
+    "sass-inline-image": "0.0.3",
+    "uglifyify": "^3.0.4",
+    "yargs": "^6.2.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-translate": "^2.11.1",
+    "annyang": "^2.4.0",
+    "d3": "^4.2.1",
+    "font-awesome": "^4.6.3",
+    "jquery": "^3.1.1",
+    "jquery-browserify": "^1.8.1",
+    "jquery-ui-browserify": "^1.11.0-pre-seelio",
+    "jsdom": "^9.4.2",
+    "n3-charts": "^2.0.27",
+    "speechkitt": "^0.3.0"
+  }
+}

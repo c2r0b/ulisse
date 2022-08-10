@@ -1,0 +1,84 @@
+table tr td .mark
+	position: relative
+	float: left
+	width: 55px
+	height: 50px
+
+	border-right: 1px solid #e0e0e0
+
+	font-size: 15px
+	line-height: 28px
+	cursor: pointer
+
+	span
+		border-bottom: 2px solid
+		font-family: 'Open Sans', sans-serif
+
+	.date
+		width: 100%
+		border-bottom: 1px solid #ddd
+		padding: 2px 7px
+		margin: 0
+		color: #000
+		font-size: 11px
+		line-height: 16px
+
+	a
+		text-decoration: none
+		color: #000
+
+	// Mark types
+	@each $type in $markTypes
+		&.type#{index($markTypes, $type) - 1} span
+			border-bottom-color: $type
+
+	.comment
+		+stretch(50px,auto,auto,0)
+		width: 150px
+		height: auto
+		background: white
+		padding: 8px 10px
+		border: 1px solid #dadada
+		font-size: 14px
+		line-height: 20px
+		display: none
+		z-index: 9999
+		+box-shadow(1px 1px 2px 0 #ccc)
+
+	&:hover
+		.comment:not(.hidden)
+			display: block
+		.date
+			display: block
+
+span.average
+	font-size: 14px
+
+ul#legenda
+	float: right
+	list-style: none
+	padding: 0
+	margin: 0
+
+	li
+		float: left
+		background: white
+		border: 1px solid #e7e7e7
+		padding: 3px 7px
+		+border-radius(50px)
+		margin-right: 10px
+		font-size: 11px
+		cursor: pointer
+		div
+			width: 10px
+			height: 10px
+			+border-radius(50px)
+			margin-right: 5px
+			display: inline-block
+
+		@each $type in $markTypes
+			&:nth-child(#{index($markTypes, $type)}) div
+				background: $type
+
+		&.disabled div
+			background: none

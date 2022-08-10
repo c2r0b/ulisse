@@ -1,0 +1,10 @@
+.panel(data-title="{{'delay' | translate}}")
+  h2
+    span(translate='add-delay')
+    | ?
+  .panel-footer
+    .btn.close(ng-click='changeDelay(1)', translate='add')
+    .btn.red.close(ng-click='changeDelay(-1)', translate='remove')
+    .btn.grey.close(translate='cancel')
+
+  .discard-btn(ng-click='closePanel()')

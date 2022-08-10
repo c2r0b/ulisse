@@ -1,0 +1,22 @@
+.panel.nopadding(data-title="{{'results' | translate}}")
+  .fullspace
+    .table_container
+      table.data_grid
+        tr
+          td.little ID
+          td(translate='name')
+          td.subject(translate='mark')
+          td.little
+        tr(ng-repeat='student in $e.students')
+          td.little(ng-bind='student.id')
+          td(ng-bind='student.name')
+          td.subject(ng-class="{\
+          'redMark'  : student.mark < 6 && student.mark != null,\
+          'textMark' : student.mark != null\
+          }", ng-bind="(student.mark || '/') | readableMark")
+          td.little
+            .icon-btn(ng-click='showPanel("edit-mark");selectStudent(student)')
+              tooltip(t='edit')
+              icn(n='edit')
+
+  .discard-btn(ng-click='closePanel()')

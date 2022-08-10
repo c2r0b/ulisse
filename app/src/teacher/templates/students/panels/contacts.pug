@@ -1,0 +1,21 @@
+.panel.nopadding(data-title="{{'contacts' | translate}}")
+  .fullspace
+    .table_container
+      table.list
+        tr
+          td(translate='email')
+          td
+            a(href='mailto:{{sel_student.contacts.email}}', target='_blank')
+              span(ng-bind='sel_student.contacts.email')
+        tr
+          td(translate='telephone')
+          td
+            a(href='tel:{{sel_student.contacts.telephone}}')
+              span(ng-bind='sel_student.contacts.telephone')
+        tr
+          td(translate='mobile')
+          td
+            a(href='tel:{{sel_student.contacts.mobile}}')
+              span(ng-bind='sel_student.contacts.mobile')
+
+  .discard-btn(ng-click='closePanel()')

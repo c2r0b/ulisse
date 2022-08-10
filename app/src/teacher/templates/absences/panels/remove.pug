@@ -1,0 +1,12 @@
+.panel(data-title="{{'remove' | translate}}")
+  h2
+    span(translate='remove-absence')
+    | ?
+  .panel-footer
+    .btn(ng-click='removeAbsence(); panel = "absences-list"',
+         translate='yes')
+
+    .btn.grey(ng-click='panel = "absences-list"',
+              translate='no')
+
+  .discard-btn(ng-click='closePanel()')

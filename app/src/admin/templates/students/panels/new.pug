@@ -1,0 +1,61 @@
+.panel.bigger.up(data-title="{{ 'new' | translate }}")
+  .fifty
+    .fifty
+      .in_group(label="{{ 'name' | translate }}")
+        input(type='text', ng-model='$n.name')
+    .fifty
+      .in_group(label="{{ 'surname' | translate }}")
+        input(type='text', ng-model='$n.surname')
+    .clear
+
+    .in_group(label="{{ 'email' | translate }}")
+      input(type='email', ng-model='$n.email')
+
+    .in_group(label="{{ 'address' | translate }}")
+      input(type='text', ng-model='$n.address')
+
+    .fifty
+      .in_group(label="{{ 'cap' | translate }}")
+        input(type='text', ng-model='$n.cap')
+    .fifty
+      .in_group(label="{{ 'sex' | translate }}")
+        br
+        select(ng-model='$n.sex')
+          option
+          option(value='1') M
+          option(value='0') F
+    .clear
+    .in_group(label="{{ 'tax_code' | translate }}")
+      input(type='text', ng-model='$n.tax_code')
+    br
+    .in_group(label="{{ 'religion' | translate }}")
+      br
+      select(ng-model='$n.religion')
+        option
+        option(ng-repeat='a in range(3) track by $index',
+               ng-value='$index',
+               translate='religion-{{$index}}')
+  .fifty
+    .in_group(label="{{ 'birthday' | translate }}")
+      input(type='date', ng-model='$n.birthday')
+
+    .in_group(label="{{ 'birthplace' | translate }}")
+      input(type='text', ng-model='$n.birthplace')
+
+    .in_group(label="{{ 'state_of_birth' | translate }}")
+      input(type='text', ng-model='$n.state_of_birth')
+
+    .in_group(label="{{ 'city_of_residence' | translate }}")
+      input(type='text', ng-model='$n.city_of_residence')
+
+    .in_group(label="{{ 'country' | translate }}")
+      input(type='text', ng-model='$n.country')
+
+    .in_group(label="{{ 'telephone' | translate }}")
+      input(type='tel', ng-model='$n.telephone')
+
+    .in_group(label="{{ 'mobile' | translate }}")
+      input(type='tel', ng-model='$n.mobile')
+    
+  .panel-footer
+    .btn.close(translate='save', ng-click='add()')

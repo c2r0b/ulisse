@@ -1,0 +1,15 @@
+section(ng-init="sort=['name',false]")
+  article
+    h1(translate='representatives')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if="data!='[]'")
+      table.data_grid
+        tr
+          td.title(translate='type')
+          td(translate='name')
+        tr(ng-repeat='representative in data', ng-click='select($index)')
+          td.title
+            b(ng-if='representative.type == 0', translate='parent')
+            b(ng-if='representative.type == 1', translate='student')
+          td(ng-bind='representative.name')

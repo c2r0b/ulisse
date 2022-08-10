@@ -1,0 +1,13 @@
+.panel(data-title="{{'justify' | translate}}")
+
+  .in_group(label="{{ 'justification' | translate }}")
+    textarea(ng-model='justification', rows='1')
+
+  .panel-footer
+    .btn(ng-click='justifyAbsence(); panel = "absences-list"',
+         translate='justify')
+
+    .btn.grey(ng-click='panel = "absences-list"',
+              translate='cancel')
+
+  .discard-btn(ng-click='closePanel()')

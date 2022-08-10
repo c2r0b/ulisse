@@ -1,0 +1,123 @@
+// Rounded little icon buttons _________________________________________________
+.icon-btn
+	position: relative
+	float: left
+	width: 33px
+	height: 33px
+
+	+border-radius(5px)
+	margin: 10px 0 8px 20px
+
+	font-size: 16px
+	line-height: 33px
+	cursor: pointer
+
+	&, span
+		border: 1px solid $mainClr
+		border-radius: 100px
+		color: $mainClr
+
+	&:hover
+		background: $mainClr
+		color: white
+
+	&.small
+		width: 33px
+		height: 33px
+
+		padding: 0 9px
+		+border-radius(100px)
+		margin-right: 15px
+
+		font-size: 17px
+
+	&.addVote
+		margin-top: 3px
+
+	.fa
+		font-size: 16px
+		padding: 0
+
+	span
+		+stretch(-6px,-12px,auto,auto)
+		background: white
+		padding: 0 7px
+		font-size: 13px
+		line-height: 21px
+
+// Rounded text buttons ________________________________________________________
+.option-btn
+	float: left
+	width: auto
+	height: auto
+
+	padding: 7px 25px
+	border: 1px solid $mainClr
+	+border-radius(5px)
+	margin-left: 10px
+
+	font-size: 13px
+	color: $mainClr
+	cursor: pointer
+
+	&:hover
+		background: $mainClr
+		color: white
+
+.icon-btn, .option-btn
+	&.red, &.red span
+		border: 1px solid $red
+		color: $red
+	&.red:hover
+		background: $red
+		color: white
+
+	&.grey, &.grey span
+		border: 1px solid #ccc
+		color: #ccc
+	&.grey:hover
+		background: none
+
+	&.blue, &.blue span
+		border: 1px solid #3A539B
+		color: #3A539B
+	&.blue:hover
+		background: #3A539B
+		color: white
+
+	&.green, &.green span
+		border: 1px solid $green
+		color: $green
+	&.green:hover
+		background: $green
+		color: white
+
+	&.purple, &.purple span
+		border: 1px solid $purple
+		color: $purple
+	&.purple:hover
+		background: $purple
+		color: white
+
+	&.orange, &.orange span
+		border: 1px solid $orange
+		color: $orange
+	&.orange:hover
+		background: $orange
+		color: white
+
+	&.white, &.white span
+		border: 1px solid white
+		&, .fa
+			color: white
+		&:hover
+			background: white
+			&, .fa
+				color: #333
+
+	&.black, &.black span
+		border: 1px solid #555
+		color: #555
+	&.black:hover
+		background: #555
+		color: white

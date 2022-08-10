@@ -1,0 +1,13 @@
+.panel(data-title="{{ 'add' | translate }}")
+  .in_group(label="{{ 'student' | translate }}")
+    br
+    select(ng-model='$e.selStudToBeAddedToClass')
+      option
+      option(ng-repeat='student in $e.schoolStudents',
+             ng-value='student.id',
+             ng-bind="student.surname + ' ' + student.name")
+  .panel-footer
+    .btn.close(translate='add',
+               ng-click='addStudent()',
+               data-panel='students')
+    .btn.grey.close(translate='cancel', data-panel='students')

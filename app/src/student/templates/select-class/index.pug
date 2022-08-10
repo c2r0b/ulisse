@@ -1,0 +1,16 @@
+section(ng-init="sort=['class',false]")
+  article
+    .right
+      .option-btn(ng-if='INFO.connectedClass', ng-click='disconnect()')
+        icn(n='close')
+        span(translate='disconnect')
+    h1(translate='select-class')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      .selectable(ng-repeat='item in data', ng-click='select(item)')
+        .name
+          b(ng-bind='item.name')
+        .button
+          icn(n='sign-in')
+      .clear

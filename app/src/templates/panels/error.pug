@@ -1,0 +1,7 @@
+.panel(data-title='{{ "error" | translate }}')
+  h2
+    span(translate='{{ error }}')
+  .panel-footer
+    .btn(translate='ok', ng-click='closePanel()')
+
+  .discard-btn(ng-click='closePanel()')

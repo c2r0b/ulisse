@@ -1,0 +1,70 @@
+panel(g-type='confirm',
+			p-name='book',
+			p-bar='false',
+			title='book',
+			msg='book-meeting',
+			callback='edit()')
+
+section(ng-init="sort=['date',true]")
+  article
+    h1(translate='meetings')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      h1
+        icn(n='check')
+        font(translate='booked')
+      table.data_grid
+        tr
+          td.little
+            icn(n='calendar-o')
+          td(translate='teacher')
+          td.subject(translate='time')
+          td.little(translate='spaces')
+          td.subject(translate='booked')
+          td.little
+        tr(ng-repeat='meeting in data | filter : { alreadyBooked : 1 }',
+					 ng-click='select(meeting)')
+          td.little.date
+            span(ng-bind="meeting.date | date: 'd'")
+            span(ng-bind="meeting.date | date: 'MMM'")
+          td(ng-bind='meeting.teacher')
+          td.subject(ng-bind='meeting.hour')
+          td.little(ng-bind='meeting.people')
+          td.subject
+            b(ng-bind='meeting.booked')
+          td.little
+            .icon-btn.black.right.list(data-panel='book',
+																			 ng-if='meeting.alreadyBooked == 0',
+																			 ng-click='select(meeting)')
+              icn(n='forward')
+            icn(n='check', ng-if='meeting.alreadyBooked == 1')
+    article
+      h1
+        icn(n='close')
+        font(translate='non-booked')
+      table.data_grid
+        tr
+          td.little
+            icn(n='calendar-o')
+          td(translate='teacher')
+          td.subject(translate='time')
+          td.little(translate='spaces')
+          td.subject(translate='booked')
+          td.little
+        tr(ng-repeat='meeting in data | filter : { alreadyBooked : 0 }',
+					 ng-click='select(meeting)')
+          td.little.date
+            span(ng-bind="meeting.date | date: 'd'")
+            span(ng-bind="meeting.date | date: 'MMM'")
+          td(ng-bind='meeting.teacher')
+          td.subject(ng-bind='meeting.hour')
+          td.little(ng-bind='meeting.people')
+          td.subject
+            b(ng-bind='meeting.booked')
+          td.little
+            .icon-btn.black(data-panel='book',
+														ng-if='meeting.alreadyBooked == 0',
+														ng-click='select(meeting)')
+              icn(n='forward')
+            icn(n='check', ng-if='meeting.alreadyBooked == 1')

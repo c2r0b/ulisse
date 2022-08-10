@@ -1,0 +1,16 @@
+.panel(data-title="{{ 'add' | translate }}")
+  .fifty
+    .in_group(label="{{ 'teacher' | translate }}")
+      br
+      select(ng-model='$e.newSubject.teacher')
+        option(ng-repeat='teacher in $e.schoolTeachers',
+               ng-value='teacher.id',
+               ng-bind='teacher.name')
+  .fifty
+    .in_group(label="{{ 'subject' | translate }}")
+      input(type='text', ng-model='$e.newSubject.name')
+  .panel-footer
+    .btn.close(translate='add',
+               ng-click='addSubject()',
+               data-panel='subjects')
+    .btn.grey.close(translate='cancel', data-panel='subjects')

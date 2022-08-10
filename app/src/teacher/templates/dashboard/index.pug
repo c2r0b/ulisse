@@ -1,0 +1,60 @@
+section
+  article
+    h1(translate='dashboard')
+  .container
+    article
+      .fifty
+        h2(translate='connected-class')
+        table.data_grid
+          tr
+            td.title(translate='class')
+            td(translate='subject')
+          tr
+            td.title(ng-bind='INFO.class.name')
+            td(ng-bind='INFO.subject.name')
+        br
+        h2(translate='last-news')
+        table.data_grid
+          tr
+            td.little
+              icn(n='calendar-o')
+            td.subject(translate='title')
+            td
+          tr
+            td.little.date
+              span(ng-bind="data.news.date | date: 'd'")
+              span(ng-bind="data.news.date | date: 'MMM'")
+            td.subject(ng-bind='data.news.title')
+            td(ng-bind='data.news.content')
+      .fifty
+        h2(translate='next-meeting')
+        table.data_grid
+          tr
+            td.little
+              icn(n='calendar-o')
+            td.subject(translate='time')
+            td(translate='booked')
+          tr
+            td.little.date
+              span(ng-bind="data.meeting.date | date: 'd'")
+              span(ng-bind="data.meeting.date | date: 'MMM'")
+            td.subject(ng-bind='data.meeting.time')
+            td(ng-bind='data.meeting.booked')
+        br
+        h2(translate='last-mark')
+        table.data_grid
+          tr
+            td.little
+              icn(n='calendar-o')
+            td.subject(translate='class')
+            td.subject(translate='subject')
+            td
+          tr
+            td.little.date
+              span(ng-bind="data.mark.date | date: 'd'")
+              span(ng-bind="data.mark.date | date: 'MMM'")
+            td.subject(ng-bind='data.mark.class')
+            td.subject(ng-bind='data.mark.subject')
+            td
+              b(ng-bind='data.mark.mark | readableMark')
+      .clear

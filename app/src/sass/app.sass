@@ -1,0 +1,112 @@
+@import import/global
+@import import/speech_assistant
+
+// Main container ______________________________________________________________
+main #page-viewer
+	width: 100%
+	height: 100vh
+
+// Header ______________________________________________________________________
+@import import/app/header
+
+// Menu ________________________________________________________________________
+@import import/app/nav
+
+// Section _____________________________________________________________________
+@import import/app/sections
+
+// Tables ______________________________________________________________________
+@import import/app/tables
+
+// Sorting _____________________________________________________________________
+@import import/app/sorting
+
+// Multiple selection list _____________________________________________________
+@import import/app/multi_select
+
+// Marks and average ___________________________________________________________
+@import import/app/marks
+
+// Buttons _____________________________________________________________________
+@import import/app/buttons
+
+// Panels ______________________________________________________________________
+@import import/app/panels
+
+// Indexes _____________________________________________________________________
+.sup, .sub
+	height: 0
+	line-height: 1
+	vertical-align: baseline
+	position: relative
+
+.sup
+	bottom: 1ex
+
+.sub
+	top: .5ex
+
+// Desks disposal ______________________________________________________________
+.desk
+	position: absolute
+	width: 110px
+	height: 60px
+	background: white
+	text-align: center
+	font-size: 15px
+	padding: 10px
+	margin: 10px
+	cursor: pointer
+	+box-shadow(1px 1px 2px 0 #ccc)
+
+	&:active
+		cursor: move
+
+// Class selection _____________________________________________________________
+.selectable
+	float: left
+	width: 25%
+	border: 1px solid #e0e0e0
+	text-align: center
+	font-size: 17px
+	color: black
+	cursor: pointer
+	.name
+		padding: 25px 10px
+	.button
+		background: #f9f9f9
+		padding: 15px 5px
+		color: $mainClrDark
+	&:hover
+		border-left-color: $mainClrDark
+
+// Tooltips ____________________________________________________________________
+@import import/app/tooltips
+
+// Avatar ______________________________________________________________________
+.avatar
+	float: center
+	background:
+		image: url(inline-image('img/avatar/male.png'))
+		size: 100% 100%
+	width: 38px
+	height: 38px
+	margin: 7px auto
+	border: 1px solid #ddd
+	+border-radius(100px)
+	&.female
+		background-image: url(inline-image('img/avatar/female.png'))
+
+// Content loading _____________________________________________________________
+#content_loading
+	+stretch($header-height,0,0,$nav-width)
+	position: fixed
+
+	background:
+		image: url(inline-image('img/loading.gif'))
+		color: #e0e0e0
+		repeat: no-repeat
+		position: center
+
+	overflow: hidden
+	z-index: 9999

@@ -1,0 +1,8 @@
+.panel(data-title="{{'random-student' | translate}}")
+
+	h2(ng-bind='data[randomStudent].name')
+
+	.panel-footer
+		.btn(translate='repeat', ng-click='getRandomStudent()')
+
+	.discard-btn(ng-click='closePanel()')

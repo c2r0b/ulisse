@@ -1,0 +1,30 @@
+.panel(data-title="{{'new' | translate}}")
+  .fifty
+    .fifty
+      .in_group(label="{{ 'mark' | translate}}")
+        select(name='vote_n',
+               ng-model='$n.vote',
+               ng-options='n for n in marks')
+        select(name='vote_s',
+               ng-options='symbol.value as symbol.text for symbol in symbols',
+               ng-model='$n.symbol')
+    .fifty
+      .in_group(label="{{ 'type' | translate}}")
+        select(name='vote_type', ng-model='$n.type')
+          option(ng-repeat='a in range(4) track by $index',
+                 value='{{ $index }}',
+                 ng-selected='$n.type == $index',
+                 translate='mark-type-{{ $index }}')
+    .clear
+    .in_group(label="{{ 'date' | translate}}")
+      input(type='date', ng-model='$n.date', ng-value='today')
+
+  .fifty
+    .in_group(label="{{ 'description' | translate}}")
+      textarea(draggable='false', rows='4', ng-model='$n.text')
+  .clear
+
+  .panel-footer
+    .btn(translate='save', ng-click='add(); closePanel()')
+
+  .discard-btn(ng-click='closePanel()')

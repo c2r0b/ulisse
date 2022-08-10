@@ -1,0 +1,13 @@
+.panel(data-title="{{ 'new' | translate }}")
+
+  .in_group(label="{{ 'amount' | translate }}")
+    input(type='text',
+          ng-model='$n.amount')
+
+  .in_group(label="{{ 'description' | translate }}")
+    textarea(draggable='false',
+             rows='3',
+             ng-model='$n.description')
+
+  .panel-footer
+    .btn.close(translate='save', ng-click='add()')

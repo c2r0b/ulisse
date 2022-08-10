@@ -1,0 +1,63 @@
+header
+	+stretch(0,0,auto)
+	position: fixed
+	height: $header-height
+
+	background:
+		color: $mainClr
+		image: url(inline-image('img/logo_school_white.png'))
+		repeat: no-repeat
+		position: center
+		size: auto 25px
+
+	padding: 0
+	margin: 0
+	+box-shadow(2px 2px 5px 0 #ccc)
+	z-index: 9100
+
+	#account, #class
+		position: relative
+		float: left
+		width: auto
+		min-width: $nav-width
+		height: $header-height
+
+		background:
+			color: $mainClrDark
+			image: url(inline-image('img/arrowdown_white.gif'))
+			position: center right 18px
+			repeat: no-repeat
+
+		padding: 19px 40px 15px 15px
+
+		text-align: left
+		font-size: 13px
+		cursor: pointer
+
+		&:hover
+			background-color: $mainClrDarker
+			ul
+				display: block
+
+		& > span
+			color: white
+
+		ul
+			+stretch($header-height, 0, auto)
+			background: $mainClrDark
+			padding: 0
+			margin: 0
+			list-style: none
+			display: none
+			+box-shadow(5px 10px 15px 0 #ccc)
+			li
+				padding: 18px 15px
+				text-align: left
+				font:
+					size: 14px
+					weight: 200
+				color: white
+				&:hover
+					background: $mainClr
+	#class
+		float: right

@@ -1,0 +1,53 @@
+#info-bar(ng-bind="sel_data.date | date : 'EEEE d MMMM'")
+
+panel(p-name='new', p-bar='false')
+panel(p-name='edit')
+confirm-removal(msg='del-note')
+
+section(ng-init="showOthers = true; sort=['date',true]")
+  article
+    .right
+      .option-btn(ng-click='showPanel("new")')
+        icn(n='plus')
+        span(translate='add')
+    h1(translate='notes')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      .checkbox
+        input#checkboxViewOthers(type='checkbox', ng-model='showOthers')
+        label(for='checkboxViewOthers')
+      span(translate='show-others-notes')
+    article(ng-if='!!data.length')
+      table.data_grid
+        tr
+          td.little
+            icn(n='calendar-o')
+            sort(by='date')
+          td.subject(translate='author')
+          td.title(translate='recipients')
+          td
+          td.little
+          td.little
+        tr(ng-repeat='note in data | orderBy:sort[0]:sort[1]',
+					 ng-click='select(note)',
+					 ng-if='note.authorIsMe == 1 || showOthers')
+          td.little.date
+            span(ng-bind="note.date | date: 'd'")
+            span(ng-bind="note.date | date: 'MMM'")
+          td.subject
+            span(ng-if='note.authorIsMe == 0', ng-bind='note.author')
+            b(ng-if='note.authorIsMe == 1', translate='you')
+          td.title(ng-if='note.type != 2')
+            ul
+              li(ng-repeat='student in note.students', ng-bind='student.name')
+          td.title(ng-if='note.type == 2', translate='entire-class')
+          td.no-align(ng-bind='note.text')
+          td.little
+            .icon-btn(ng-click='showPanel("edit")', ng-if='note.authorIsMe == 1')
+              tooltip(t='edit')
+              icn(n='edit')
+          td.little
+            .icon-btn.red(ng-click='showPanel("remove")', ng-if='note.authorIsMe == 1')
+              tooltip(t='remove')
+              | 	                  X

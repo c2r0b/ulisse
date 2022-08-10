@@ -1,0 +1,103 @@
+section
+  article
+    h1(translate='dashboard')
+  .container
+    article
+      .fifty
+        h2
+          icn(n="{{ data.sex ? 'male' : 'female'}}")
+          span(translate='personal-data')
+        table.list
+          tr
+            td(translate='email')
+            td
+              a(href='mailto:{{ data.email}}', target='_blank')
+                span(ng-bind='data.email')
+          tr
+            td(translate='birthday')
+            td(ng-bind='data.birthday')
+          tr
+            td(translate='birthplace')
+            td
+              a(href='//google.com/maps/place/{{ data.birthplace}}',
+								target='_blank')
+                span(ng-bind='data.birthplace')
+          tr
+            td(translate='state_of_birth')
+            td(ng-bind='data.state_of_birth')
+          tr
+            td(translate='tax_code')
+            td(ng-bind='data.tax_code')
+          tr
+            td(translate='cap')
+            td
+              a(href='//google.com/maps/place/{{ data.cap}}',
+								target='_blank')
+                span(ng-bind='data.cap')
+          tr
+            td(translate='address')
+            td
+              a(href='//google.com/maps/place/{{ data.address}}',
+								target='_blank')
+                span(ng-bind='data.address')
+          tr
+            td(translate='city_of_residence')
+            td
+              a(href='//google.com/maps/place/{{ data.city_of_residence}}',
+								target='_blank')
+                span(ng-bind='data.city_of_residence')
+          tr
+            td(translate='country')
+            td(ng-bind='data.country')
+          tr
+            td(translate='telephone')
+            td
+              a(href='tel:{{ data.telephone}}')
+                span(ng-bind='data.telephone')
+          tr
+            td(translate='mobile')
+            td
+              a(href='tel:{{ data.mobile}}')
+                span(ng-bind='data.mobile')
+      .fifty
+        h2
+          icn(n='unlock')
+          span(translate='permissions')
+        table.list
+          tr
+            td(translate='admins-management')
+            td
+              icn(n="{{ data.adminsManagement == 1 ? 'check' : 'close' }}")
+          tr
+            td(translate='teachers-management')
+            td
+              icn(n="{{ data.teachersManagement == 1 ? 'check' : 'close'}}")
+          tr
+            td(translate='students-management')
+            td
+              icn(n="{{ data.studentsManagement == 1 ? 'check' : 'close'}}")
+          tr
+            td(translate='classes-management')
+            td
+              icn(n="{{ data.classesManagement == 1 ? 'check' : 'close'}}")
+          tr
+            td(translate='taxes-management')
+            td
+              icn(n="{{ data.taxesManagement == 1 ? 'check' : 'close'}}")
+          tr
+            td(translate='meetings-management')
+            td
+              icn(n="{{ data.meetingsManagement == 1 ? 'check' : 'close'}}")
+          tr
+            td(translate='news-management')
+            td
+              icn(n="{{ data.newsManagement == 1 ? 'check' : 'close'}}")
+          tr
+            td(translate='schedule-management')
+            td
+              icn(n="{{ data.scheduleManagement == 1 ? 'check' : 'close'}}")
+          tr
+            td(translate='ballots-management')
+            td
+              icn(n="{{ data.ballotsManagement == 1 ? 'check' : 'close'}}")
+      .clear

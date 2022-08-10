@@ -1,0 +1,34 @@
+section
+  .container
+    article
+      .fifty
+        h1 Impostazioni account
+        p
+          b Cambia password
+          br
+          |	Deve contenere almeno 8 caratteri alfanumerici e un carattere speciale
+        p
+          input.full(type='text', placeholder='Indirizzo email')
+          input.full(type='text', placeholder='Password corrente')
+          input(type='text', placeholder='Nuova password')
+          input(type='text', placeholder='Ripeti nuova password')
+        .option-btn
+          icn(n='check')
+          span(translate='confirm')
+      .fifty
+        h1 Preferenze navigazione
+        p
+          | Queste preferenze saranno utilizzate per l'utilizzo del tuo account su qualsiasi dispositivo
+        p
+          b Lingua
+        p
+          select#lang(ng-model='lang')
+            option(value='it') Italiano
+            option(value='en') English
+        .clear
+        br
+        .option-btn(ng-click='save()')
+          icn(n='save')
+          span(translate='save')
+      .clear
+      br

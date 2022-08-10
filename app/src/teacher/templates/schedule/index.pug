@@ -1,0 +1,20 @@
+section
+  article
+    h1(translate='schedule')
+  .container
+    article
+      table.data_grid.schedule
+        tr
+          td.little(translate='hour')
+          td(ng-repeat='a in range(7) track by $index',
+             translate='weekDay{{$index+1}}')
+        tr(ng-repeat='a in range(12) track by $index')
+          td.little.identifier
+            span(ng-bind='$index + 1')
+            | °
+          td(ng-repeat='a in range(7) track by $index')
+            b(ng-bind='data[$index][$parent.$index][0].class')
+            br
+            span(ng-bind='data[$index][$parent.$index][0].subject')
+            br
+            i(ng-bind='data[$index][$parent.$index][0].comment')

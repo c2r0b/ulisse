@@ -1,0 +1,48 @@
+#info-bar(ng-bind="$e.date | date : 'EEEE d MMMM'")
+
+panel(p-name='new', p-bar='false')
+panel(p-name='edit')
+confirm-removal(msg='del-reminder')
+
+section(ng-init="showOthers = true; $e.authorIsMe = 1; sort=['date',true]")
+  article
+    .right
+      .option-btn(ng-click='showPanel("new")')
+        icn(n='plus')
+        span(translate='add')
+    h1(translate='reminders')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      .checkbox
+        input#checkboxViewOthers(type='checkbox', ng-model='showOthers')
+        label(for='checkboxViewOthers')
+      span(translate='others-reminder')
+    article(ng-if='!!data.length')
+      table.data_grid
+        tr
+          td.little
+            icn(n='calendar-o')
+            sort(by='date')
+          td.subject(translate='author')
+          td
+          td.little
+          td.little
+        tr(ng-repeat='reminder in data | orderBy:sort[0]:sort[1]',
+					 ng-click='select(reminder)',
+					 ng-if='reminder.authorIsMe == 1 || showOthers')
+          td.little.date
+            span(ng-bind="reminder.date | date: 'd'")
+            span(ng-bind="reminder.date | date: 'MMM'")
+          td.subject
+            span(ng-if='reminder.authorIsMe == 0', ng-bind='reminder.author')
+            b(ng-if='reminder.authorIsMe == 1', translate='you')
+          td.no-align(ng-bind='reminder.text')
+          td.little
+            .icon-btn(ng-click='showPanel("edit")', ng-if='reminder.authorIsMe == 1')
+              tooltip(t='edit')
+              icn(n='edit')
+          td.little
+            .icon-btn.red(ng-click='showPanel("remove")', ng-if='reminder.authorIsMe == 1')
+              tooltip(t='remove')
+              | 	              X

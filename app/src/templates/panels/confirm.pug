@@ -1,0 +1,11 @@
+.panel(data-title='{{ title | translate }}')
+  h2
+    span(translate='{{ msg }}')
+    | ?
+  .panel-footer
+    .btn.red(ng-click='$eval(callback); closePanel()',
+                   data-panel='{{ acceptPanel }}',
+                   translate='yes')
+    .btn(data-panel='{{ denyPanel }}', ng-click='closePanel()', translate='no')
+
+  .discard-btn(ng-click='closePanel()')

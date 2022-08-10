@@ -1,0 +1,8 @@
+.panel(data-title="{{ 'payments' | translate }}")
+  multi-select(ng-model='$e.payments',
+               object-property='name',
+               api-url='studentsList',
+               placeholder="{{ 'student' | translate }}...",
+               suggestions-arr='')
+  .panel-footer
+    .btn.close(translate='save', ng-click='savePayments()')

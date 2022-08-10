@@ -1,0 +1,84 @@
+doctype html
+html
+  head
+    title Ulisse - Teacher Web App
+    meta(charset='utf-8')
+    meta(name='viewport', content='initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    link(rel='stylesheet', href='../css/app.css')
+    script(src='app.min.js')
+
+  body(ng-app='ulisse', ng-controller='mainCtrl')
+    #loading
+    aside
+      header
+        #class
+          span(ng-switch='')
+            icn(n='graduation-cap')
+            span(ng-switch-when='!INFO.teacher.class',
+                 translate='select-class')
+            span(ng-switch-default='')
+              span(ng-bind='INFO.class.name')
+              | &nbsp;-&nbsp;
+              span(ng-bind='INFO.subject.name')
+          ul
+            li(ng-repeat='class in teacherClasses',
+               ng-click='selectClass(class)')
+              span(ng-bind='class.class')
+              | &nbsp;-&nbsp;
+              span(ng-bind='class.subject')
+        #account
+          span
+            icn(n='user')
+            span(ng-bind='INFO.teacher.name')
+            | &nbsp;
+            span(ng-bind='INFO.teacher.surname')
+          ul
+            li(ng-click='showPanel("settings")')
+              icn(n='cog')
+              span(translate='settings')
+            li(ng-click='disconnectClass()')
+              icn(n='times-circle-o')
+              span(translate='disconnect-class')
+            li(ng-click='showPanel("logout")')
+              icn(n='sign-out')
+              span(translate='logout')
+      nav
+        ul
+          menu-li(rel='dashboard', icn='dashboard')
+          menu-li(rel='news', icn='bullhorn')
+          menu-li(rel='schedule', icn='calendar-o')
+          menu-li(rel='meetings', icn='users')
+
+        .separator(ng-hide='!INFO.class')
+          span(translate='class')
+
+        ul(ng-hide='!INFO.class')
+          menu-li(rel='signatures', icn='pencil')
+          menu-li(rel='students', icn='graduation-cap')
+          menu-li(rel='absences', icn='calendar-times-o')
+          menu-li(rel='marks', icn='sort-numeric-asc')
+          menu-li(rel='homework', icn='book')
+          menu-li(rel='arguments', icn='th-list')
+          menu-li(rel='tests', icn='file-text-o')
+          menu-li(rel='notes', icn='exclamation-triangle')
+          menu-li(rel='reminder', icn='bell')
+          menu-li(rel='representatives', icn='users')
+          menu-li(rel='desks-disposal', icn='arrows-alt')
+          menu-li(rel='ballot', icn='thumbs-up')
+    main
+      #content_loading
+
+      panel(g-type='confirm',
+            p-name='logout',
+            p-bar='false',
+            title='logout',
+            msg='confirm-logout',
+            callback='logout()')
+
+      panel(g-type='error',
+            p-name='invalid-data',
+            error='invalid-data')
+
+      article
+        #page-viewer
+          div(ng-view='')

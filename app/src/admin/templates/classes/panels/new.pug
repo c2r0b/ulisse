@@ -1,0 +1,30 @@
+.panel.bigger.up(data-title="{{ 'new' | translate }}")
+  .fifty
+    .in_group(label="{{ 'name' | translate }}")
+      input(type='text', ng-model='$n.name')
+
+    h2(translate='students')
+    multi-select(ng-model='$n.students',
+                 object-property='name',
+                 api-url='studentsList',
+                 placeholder="{{'search'|translate}}...",
+                 suggestions-arr='')
+  .fifty
+    .in_group(label="{{ 'coordinator' | translate }}")
+      br
+      select(ng-model='$n.coordinator_id')
+        option
+        option(ng-repeat='teacher in data.teachers',
+               ng-value='teacher.id',
+               ng-bind='teacher.name')
+    
+    h2(translate='teachers-subjects')
+    multi-select(ng-model='$n.teachers',
+                 object-property='name',
+                 api-url='teachersList',
+                 placeholder="{{'teacher'|translate}}...",
+                 fillable-option='1', allow-='1',
+                 option-placeholder="{{'subject'|translate}}",
+                 suggestions-arr='')
+  .panel-footer
+    .btn.close(translate='save', ng-click='add()')

@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    title Ulisse Web App Login
+    meta(charset='utf-8')
+    meta(name='viewport', content='initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    link(rel='stylesheet', href='../css/login.css')
+    script(src='app.min.js')
+  body(ng-app='ulisse', ng-controller='mainCtrl', ng-cloak='')
+    #loading
+    header
+      h2(ng-bind='INFO.appVersion')
+    main
+      #login
+        form(ng-submit='login()')
+          #logo
+          .error(ng-if='loginFailed', translate='login-err')
+          input(type='text', placeholder="{{ 'school' | translate }}", ng-model='school_id', required='')
+          input(type='text', placeholder="{{ 'user_id' | translate }}", ng-model='user_id', required='')
+          input(type='text', placeholder="{{ 'password' | translate }}", ng-model='password', ng-show='showPwd', required='')
+          input(type='password', placeholder="{{ 'password' | translate }}", ng-model='password', ng-hide='showPwd', required='')
+          .toggler
+            .checkbox
+              input#checkboxView(type='checkbox', ng-model='showPwd')
+              label(for='checkboxView')
+            span(ng-if='!showPwd', translate='show')
+            span(ng-if='showPwd', translate='hide')
+          input(type='submit', ng-value="'login' | translate")
+    footer
+      select#lang
+        option(value='it') Italiano
+        option(value='en') English
+      ul
+        a(href='../../')
+          li(translate='about')
+        a(href='mailto:info@ulisse.school')
+          li(translate='contacts')

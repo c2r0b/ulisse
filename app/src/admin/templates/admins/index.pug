@@ -1,0 +1,83 @@
+#info-bar
+  span(ng-bind='$e.surname')
+  span(ng-bind='$e.name')
+
+panel(p-name='new', p-bar='false')
+panel(p-name='edit')
+panel(p-name='permissions')
+panel(p-name='credentials')
+confirm-removal(msg='del-admin')
+panel(g-type='confirm',
+			p-name='rm-sel',
+			p-bar='false',
+			title='rm-sel',
+			msg='rm-sel-admins-msg',
+			callback='removeSelected()')
+
+section(ng-init="sort=['surname',false]")
+  article
+    .right
+      .option-btn(data-panel='new', ng-click='clear()')
+        icn(n='plus')
+        span(translate='add')
+      .option-btn(data-panel='rm-sel')
+        icn(n='remove')
+        span(translate='rm-sel')
+    h1(translate='admins')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      table.data_grid
+        tr
+          td.check
+            .checkbox
+              input#checkboxViewAll.selectAll(type='checkbox')
+              label(for='checkboxViewAll')
+          td.little
+            input(placeholder='id', ng-model='query.id')
+            sort(by='id')
+          td.subject
+            input(placeholder="{{ 'surname' | translate }}",
+									ng-model='query.surname')
+            sort(by='surname')
+          td.subject
+            input(placeholder="{{ 'name' | translate }}",
+									ng-model='query.name')
+            sort(by='name')
+          td
+          td.little
+          td.little
+          td.little
+          td.little
+        tr(ng-repeat='\
+        admin in data\
+        | orderBy	: sort[0] : sort[1]\
+        | filter	:	query', ng-click='select(admin)')
+          td.check
+            .checkbox
+              input.selection(type='checkbox',
+															rel='{{ admin.id }}',
+															id='checkboxView{{ $index }}')
+              label(for='checkboxView{{ $index }}')
+          td.little(ng-bind='admin.id')
+          td.subject(ng-bind='admin.surname')
+          td.subject(ng-bind='admin.name')
+          td
+          td.little
+            .icon-btn.green(ng-click='getCredentials(admin)',
+														data-panel='credentials')
+              tooltip(t='credentials')
+              icn(n='key')
+          td.little
+            .icon-btn(ng-click='getAdminInfo(admin)', data-panel='edit')
+              tooltip(t='edit')
+              icn(n='edit')
+          td.little
+            .icon-btn.black(ng-click='getPermissions(admin)',
+														data-panel='permissions')
+              tooltip(t='permissions')
+              icn(n='unlock')
+          td.little
+            .icon-btn.red(data-panel='remove')
+              tooltip(t='remove')
+              | 	                  X

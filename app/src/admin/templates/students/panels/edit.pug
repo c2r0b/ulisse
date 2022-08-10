@@ -1,0 +1,62 @@
+.panel.bigger.up(data-title="{{ 'edit' | translate }}")
+  .fifty
+    .fifty
+      .in_group(label="{{ 'name' | translate }}")
+        input(type='text', ng-model='$e.name')
+    .fifty
+      .in_group(label="{{ 'surname' | translate }}")
+        input(type='text', ng-model='$e.surname')
+    .clear
+    
+    .in_group(label="{{ 'email' | translate }}")
+      input(type='email', ng-model='$e.email')
+
+    .in_group(label="{{ 'address' | translate }}")
+      input(type='text', ng-model='$e.address')
+
+    .fifty
+      .in_group(label="{{ 'cap' | translate }}")
+        input(type='text', ng-model='$e.cap')
+    .fifty
+      .in_group(label="{{ 'sex' | translate }}")
+        br
+        select(ng-model='$e.sex')
+          option
+          option(value='1') M
+          option(value='0') F
+    .clear
+    .in_group(label="{{ 'tax_code' | translate }}")
+      input(type='text', ng-model='$e.tax_code')
+    br
+    .in_group(label="{{ 'religion' | translate }}")
+      br
+      select(ng-model='$e.religion')
+        option
+        option(ng-repeat='a in range(3) track by $index',
+               ng-value='$index',
+               ng-selected='$e.religion == $index',
+               translate='religion-{{$index}}')
+  .fifty
+    .in_group(label="{{ 'birthday' | translate }}")
+      input(type='date', ng-model='$e.birthday', format-date='')
+
+    .in_group(label="{{ 'birthplace' | translate }}")
+      input(type='text', ng-model='$e.birthplace')
+
+    .in_group(label="{{ 'state_of_birth' | translate }}")
+      input(type='text', ng-model='$e.state_of_birth')
+
+    .in_group(label="{{ 'city_of_residence' | translate }}")
+      input(type='text', ng-model='$e.city_of_residence')
+
+    .in_group(label="{{ 'country' | translate }}")
+      input(type='text', ng-model='$e.country')
+
+    .in_group(label="{{ 'telephone' | translate }}")
+      input(type='tel', ng-model='$e.telephone')
+
+    .in_group(label="{{ 'mobile' | translate }}")
+      input(type='tel', ng-model='$e.mobile')
+
+  .panel-footer
+    .btn.close(translate='save', ng-click='edit()')

@@ -1,0 +1,20 @@
+.panel(data-title="{{'edit' | translate}}")
+
+	.in_group(label="{{ 'mark' | translate}}")
+		| :
+		.clear
+		select(name='vote_n',
+					 ng-model='$v.vote',
+					 ng-options='n for n in marks')
+		select(name='vote_s',
+					 ng-options='symbol.value as symbol.text for symbol in symbols',
+					 ng-model='$v.symbol')
+
+	.panel-footer
+		.btn(ng-click='showPanel("results");saveMark()', translate='save')
+		.btn.red(ng-click='showPanel("remove-mark")',
+						 ng-if='$v.mark != null',
+						 translate='remove')
+		.btn.grey(ng-click='showPanel("results")', translate='cancel')
+
+	.discard-btn(ng-click='closePanel()')

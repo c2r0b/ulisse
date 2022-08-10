@@ -1,0 +1,53 @@
+section(ng-init="sort=['date',true]")
+  article
+    h1(translate='absences')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      h2
+        icn(n='close')
+        font(translate='non-justified')
+      table.data_grid
+        tr
+          td.little
+            icn(n='calendar-o')
+          td.subject
+            icn(n='clock-o')
+            span(translate='time')
+          td(translate='type')
+        tr(ng-repeat='absence in data\
+        | filter: { justified: 0 }\
+        | orderBy: sort[0]:sort[1]')
+          td.little.date
+            span(ng-bind="absence.date | date: 'd'")
+            span(ng-bind="absence.date | date: 'MMM'")
+          td.subject
+            span(ng-if='absence.type != 0', ng-bind='absence.time')
+            span(ng-if='absence.type == 0 || !absence.type')
+          td(translate='absence-type-{{absence.type}}')
+    article(ng-if='!!data.length')
+      h2
+        icn(n='check')
+        font(translate='justified-absences')
+      table.data_grid
+        tr
+          td.little
+            icn(n='calendar-o')
+          td.subject
+            icn(n='clock-o')
+            span(translate='time')
+          td.title(translate='type')
+          td(translate='justification')
+        tr(ng-repeat='absence in data\
+        | filter: { justified: 1 }\
+        | orderBy: sort[0]:sort[1]')
+          td.little.date
+            span(ng-bind="absence.date | date: 'd'")
+            span(ng-bind="absence.date | date: 'MMM'")
+          td.subject
+            span(ng-if='absence.type != 0', ng-bind='absence.time')
+            span(ng-if='absence.type == 0')
+          td.title(translate='absence-type-{{absence.type}}')
+          td
+            span(ng-if='absence.justified == 1',
+								 ng-bind='absence.justification')

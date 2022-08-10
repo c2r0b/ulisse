@@ -1,0 +1,68 @@
+.autocomplete-list
+	+stretch(41px, 0, auto)
+	width: 100%
+
+	ul
+		margin: 0
+		padding: 0
+		height: auto
+		max-height: 240px
+		background-color: white
+		border: 1px solid #ddd
+		overflow: auto
+
+		li
+			cursor: pointer
+			list-style: inside none none
+			padding: 5px 0 5px 10px
+			font-size: 16px
+
+			&.autocomplete-active
+				background-color: $mainClr
+				color: white
+
+.form-item-container
+	width: 100%
+	position: relative
+
+	.list-inline
+		max-height: 180px
+		min-height: 240px
+		overflow-y: scroll
+		border: 1px solid #ddd
+		table
+			border: none
+			tr
+				&:first-child
+					td
+						input
+							width: 100%
+							text-transform: none
+							&.choose
+								background: url(inline-image('img/arrowdown.gif')) no-repeat 98% 50%
+						&:last-child
+							width: 10px
+							color: $mainClr
+							font-size: 13px
+							text-align: center
+							cursor: pointer
+							&:hover
+								background: $mainClr
+								color: white
+							i
+								padding: 0
+
+				&:not(:first-child)
+					padding: 10px 7px
+					margin: 0
+					border-bottom: 1px solid #ccc
+					font-size: 15px
+					td:last-child
+						cursor: pointer
+						color: $red
+						&:hover
+							background: $red
+							color: white
+						i
+							font-size: 12px
+							padding: 0

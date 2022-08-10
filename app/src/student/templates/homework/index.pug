@@ -1,0 +1,25 @@
+section(ng-init="sort=['date',true]")
+  article
+    h1(translate='homework')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      table.data_grid
+        tr
+          td.little
+            icn(n='calendar-o')
+            sort(by='date')
+          td.title
+            input(placeholder="{{ 'subject' | translate }}",
+									ng-model='query.subject')
+            sort(by='subject')
+          td
+        tr(ng-repeat='homework in data\
+        | orderBy	:	sort[0]:sort[1]\
+        | filter		:	query')
+          td.little.date
+            span(ng-bind="homework.date | date: 'd'")
+            span(ng-bind="homework.date | date: 'MMM'")
+          td.title
+            b(ng-bind='homework.subject')
+          td.no-align(ng-bind='homework.text')

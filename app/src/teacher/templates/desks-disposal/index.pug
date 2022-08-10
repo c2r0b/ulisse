@@ -1,0 +1,15 @@
+panel(g-type='confirm', p-name='save', p-bar='false', title='save',
+      msg='confirm-desks-disposal', callback='save()')
+
+section(ng-init="sort=['name',false]")
+  article
+    .right
+      .option-btn(ng-click='showPanel("save")')
+        icn(n='save')
+        span(translate='save')
+    h1(translate='desks-disposal')
+
+  #dndspace.container
+    .desk(draggable, ng-repeat='desk in data', id='{{desk.student_id}}',
+          ng-bind='desk.student_name',
+          style='margin-left:{{desk.x}}px;margin-top:{{desk.y}}px')

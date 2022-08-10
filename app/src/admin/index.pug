@@ -1,0 +1,56 @@
+doctype html
+html
+  head
+    title Ulisse - Admin Web App
+    meta(charset='utf-8')
+    meta(name='viewport', content='initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    link(rel='stylesheet', href='../css/app.css')
+    script(src='app.min.js')
+
+  body(ng-app='ulisse', ng-controller='mainCtrl')
+    #loading
+    aside
+      header
+        #account
+          span
+            icn(n='user')
+            span(ng-bind='INFO.admin.name')
+            | &nbsp;
+            span(ng-bind='INFO.admin.surname')
+          ul
+            li(data-panel='settings')
+              icn(n='cog')
+              span(translate='settings')
+            li(data-panel='logout')
+              icn(n='sign-out')
+              span(translate='logout')
+      nav
+        ul
+          menu-li(rel='dashboard', icn='dashboard')
+          menu-li(rel='personal-data', icn='male')
+          menu-li(rel='analytics', icn='line-chart')
+
+        .separator
+          span(translate='school')
+
+        ul
+          menu-li(rel='students', icn='users')
+          menu-li(rel='teachers', icn='graduation-cap')
+          menu-li(rel='classes', icn='book')
+          menu-li(rel='admins', icn='lock')
+          menu-li(rel='meetings', icn='comment')
+          menu-li(rel='taxes', icn='money')
+          menu-li(rel='ballots', icn='comments')
+          menu-li(rel='news', icn='bullhorn')
+
+    main
+      #content_loading
+      panel(g-type='confirm',
+            p-name='logout',
+            p-bar='false',
+            title='logout',
+            msg='confirm-logout',
+            callback='logout()')
+      article
+        #page-viewer
+          div(ng-view='')

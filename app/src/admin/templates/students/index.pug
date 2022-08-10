@@ -1,0 +1,85 @@
+#info-bar
+  span(ng-bind='$e.surname')
+  span(ng-bind='$e.name')
+
+panel(p-name='new', p-bar='false')
+panel(p-name='edit')
+panel(p-name='parents')
+panel(p-name='credentials')
+confirm-removal(msg='del-student')
+
+panel(g-type='confirm',
+			p-name='rm-sel',
+			p-bar='false',
+			title='rm-sel',
+			msg='rm-sel-students-msg',
+			callback='removeSelected()')
+
+section(ng-init="sort=['surname',false]")
+  article
+    .right
+      .option-btn(data-panel='new', ng-click='clear()')
+        icn(n='plus')
+        span(translate='add')
+      .option-btn(data-panel='rm-sel')
+        icn(n='remove')
+        span(translate='rm-sel')
+    h1(translate='students-parents')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      table.data_grid
+        tr
+          td.check
+            .checkbox
+              input#checkboxViewAll.selectAll(type='checkbox')
+              label(for='checkboxViewAll')
+          td.little
+            input(placeholder='id', ng-model='query.id')
+            sort(by='id')
+          td.subject
+            input(placeholder="{{ 'surname' | translate }}",
+									ng-model='query.surname')
+            sort(by='surname')
+          td.subject
+            input(placeholder="{{ 'name' | translate }}",
+									ng-model='query.name')
+            sort(by='name')
+          td
+          td.little
+          td.little
+          td.little
+          td.little
+        tr(ng-repeat='\
+        student in data\
+        | orderBy	: sort[0] : sort[1]\
+        | filter	:	query', ng-click='select(student)')
+          td.check
+            .checkbox
+              input.selection(type='checkbox',
+															rel='{{ student.id }}',
+															id='checkboxView{{ $index }}')
+              label(for='checkboxView{{ $index }}')
+          td.little(ng-bind='student.id')
+          td.subject(ng-bind='student.surname')
+          td.subject(ng-bind='student.name')
+          td
+          td.little
+            .icon-btn.green(ng-click='getCredentials(student)',
+														data-panel='credentials')
+              tooltip(t='credentials')
+              icn(n='key')
+          td.little
+            .icon-btn(ng-click='getStudentInfo(student)',
+											data-panel='edit')
+              tooltip(t='edit')
+              icn(n='edit')
+          td.little
+            .icon-btn.black(ng-click='getParentInfo(student)',
+														data-panel='parents')
+              tooltip(t='parents')
+              icn(n='users')
+          td.little
+            .icon-btn.red(data-panel='remove')
+              tooltip(t='remove')
+              | X

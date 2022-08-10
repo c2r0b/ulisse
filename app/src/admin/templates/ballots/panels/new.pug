@@ -1,0 +1,9 @@
+.panel.bigger.up(data-title="{{ 'new' | translate }}")
+  .fifty
+    .in_group(label="{{ 'name' | translate }}")
+      input(type='text', ng-model='$n.name')
+    h2(translate='students')
+  .fifty
+  .panel-footer
+    .btn.close(translate='save', ng-click='add()')
+    div

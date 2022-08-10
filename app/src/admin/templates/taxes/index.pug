@@ -1,0 +1,48 @@
+#info-bar(ng-bind="$e.date | date: 'EEEE d MMMM'")
+
+panel(p-name='new', p-bar='false')
+panel(p-name='edit', p-bar='false')
+panel(p-name='payments', p-bar='false')
+confirm-removal(msg='del-tax')
+
+section(ng-init="sort=['id',true]")
+  article
+    .right
+      .option-btn(data-panel='new')
+        icn(n='plus-circle')
+        span(translate='add')
+    h1(translate='taxes')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      table.data_grid
+        tr
+          td.little
+            input(placeholder='id', ng-model='query.id')
+            sort(by='id')
+          td(translate='description')
+          td.title(translate='amount')
+          td.little
+          td.little
+          td.little
+        tr(ng-repeat='tax in data | orderBy:sort[0]:sort[1]')
+          td.little(ng-bind='tax.id')
+          td(ng-bind='tax.description')
+          td.title
+            span(ng-bind='tax.amount')
+            |  €
+          td.little
+            .icon-btn.green(ng-click='getPayments(tax);select(tax)',
+														data-panel='payments')
+              tooltip(t='payments')
+              icn(n='money')
+          td.little
+            .icon-btn(data-panel='edit',
+											ng-click='select(tax)')
+              tooltip(t='edit')
+              icn(n='edit')
+          td.little
+            .icon-btn.red(data-panel='remove',
+													ng-click='select(tax)')
+              tooltip(t='remove')
+              | X

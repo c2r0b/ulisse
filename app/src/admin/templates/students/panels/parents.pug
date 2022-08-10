@@ -1,0 +1,77 @@
+.panel.bigger.up(data-title="{{ 'parents' | translate }}")
+  .fifty
+    b
+      span(translate='parent')
+      |  1
+    .clear
+    
+    .fifty
+      .in_group(label="{{ 'name' | translate }}")
+        input(type='text', ng-model='$e[0].name')
+    .fifty
+      .in_group(label="{{ 'surname' | translate }}")
+        input(type='text', ng-model='$e[0].surname')
+    .clear
+
+    .in_group(label="{{ 'email' | translate }}")
+      input(type='email', ng-model='$e[0].email')
+
+    .fifty
+      .in_group(label="{{ 'sex' | translate }}")
+        br
+        select(ng-model='$e[0].sex')
+          option
+          option(value='1') M
+          option(value='0') F
+    .fifty
+      .in_group(label="{{ 'tax_code' | translate }}")
+        input(type='text', ng-model='$e[0].tax_code')
+    .clear
+
+    .in_group(label="{{ 'birthday' | translate }}")
+      input(type='date', ng-model='$e[0].birthday', format-date='')
+
+    .fifty
+      .in_group(label="{{ 'telephone' | translate }}")
+        input(type='tel', ng-model='$e[0].telephone')
+    .fifty
+      .in_group(label="{{ 'mobile' | translate }}")
+        input(type='tel', ng-model='$e[0].mobile')
+  .fifty
+    b
+      span(translate='parent')
+      |  2
+    .clear
+    .fifty
+      .in_group(label="{{ 'name' | translate }}")
+        input(type='text', ng-model='$e[1].name')
+    .fifty
+      .in_group(label="{{ 'surname' | translate }}")
+        input(type='text', ng-model='$e[1].surname')
+    .clear
+    .in_group(label="{{ 'email' | translate }}")
+      input(type='email', ng-model='$e[1].email')
+    .fifty
+      .in_group(label="{{ 'sex' | translate }}")
+        br
+        select(ng-model='$e[1].sex')
+          option
+          option(value='1') M
+          option(value='0') F
+    .fifty
+      .in_group(label="{{ 'tax_code' | translate }}")
+        input(type='text', ng-model='$e[1].tax_code')
+    .clear
+    .in_group(label="{{ 'birthday' | translate }}")
+      input(type='date', ng-model='$e[1].birthday', format-date='')
+
+    .fifty
+      .in_group(label="{{ 'telephone' | translate }}")
+        input(type='tel', ng-model='$e[1].telephone')
+
+    .fifty
+      .in_group(label="{{ 'mobile' | translate }}")
+        input(type='tel', ng-model='$e[1].mobile')
+
+  .panel-footer
+    .btn.close(translate='save', ng-click='editParents()')

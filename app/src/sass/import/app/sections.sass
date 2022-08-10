@@ -1,0 +1,101 @@
+section
+	+stretch(0,0,auto,$nav-width)
+	padding: $header-height 0 0 0
+	margin: 0
+	border: 0
+	background: #e0e0e0
+	min-width: 900px
+
+	h1.none
+		font:
+			family: 'Yantramanav', sans-serif
+			weight: 300
+		text-align: center
+		font-size: 25px
+		color: #666
+
+	&.full
+		left: 0
+		article
+			left: 40px
+
+	article
+		background: white
+		padding: 10px 0 10px 10px
+		margin: 15px
+		+box-shadow(2px 2px 5px 0 #ccc)
+
+		.fifty
+			&:nth-child(2)
+				padding-left: 15px
+
+		.right
+			margin: 10px 10px 10px 0
+			.option-btn
+				margin:
+					top: -10px
+
+		h1
+			font:
+				family: 'Lato', sans-serif
+				size: 18px
+				weight: 400
+			color: black
+			margin: 5px 10px
+
+			> span:nth-child(2)
+				color: #aaa
+				font-size: 14px
+				padding-left: 5px
+
+		h2
+			font:
+				family: 'Open Sans', sans-serif
+				weight: 400
+				size: 15px
+			color: $mainClr
+			margin: 0 0 11px 0
+
+		.option-btn
+			color: #333
+			border-color: #333
+			margin:
+				left: 0
+				right: 10px
+			&:hover
+				background: #ddd
+				color: #333
+
+		input
+			&[type=text]
+				width: 45%
+				padding: 5px 10px
+				margin: 5px 0
+				font-size: 15px
+				&.full
+					width: 90%
+			&[type=color]
+				background: white
+				cursor: pointer
+
+	.container
+		float: center
+		padding: 0 15px 10px 15px
+
+		#dndspace
+			overflow: hidden
+
+		article
+			position: relative
+			left: 0
+			height: auto
+			background: white
+			padding: 15px
+			border: 0
+			margin: 0 0 10px 0
+			z-index: 5
+			h1
+				padding-top: 0
+
+	&.no_padding h3
+		padding: 10px 10px

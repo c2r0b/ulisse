@@ -1,0 +1,243 @@
+// Information bar above panel _________________________________________________
+#info-bar
+	+stretch(0,0,auto,$nav-width)
+	position: fixed
+	background: $mainClr
+	height: $header-height
+
+	color: white
+	font:
+		size: 16px
+		weight: 400
+	text-align: center
+	line-height: $header-height
+
+	display: none
+	z-index: 9150
+	&.full
+		left: 0
+
+	.icon-btn
+		margin-top: -4px
+
+// Panel _______________________________________________________________________
+// container that loads the referred div with class panel
+panel
+	+stretch($header-height, 0, 0, $nav-width)
+	background-color: rgba(51, 51, 51, 0.6)
+	z-index: 9992
+	&.full
+		left: 0
+
+.panel
+	position: relative
+	width: 480px
+
+	background:
+		image: linear-gradient(white 50px, white 0)
+		position: top left
+		size: auto
+		repeat: repeat
+
+	padding: $header-height 20px 75px 20px
+	margin: 12% auto
+
+	color: #000
+	font-size: 17px
+	text-transform: none
+	+box-shadow(2px 2px 2px 1px #666)
+	vertical-align: top
+
+	&:before
+		+stretch(0, 0, auto, 0)
+		content: attr(data-title)
+
+		height: $panel-header-height
+		background-color: #f1f1f1
+
+		padding: 14px 0 0 20px
+
+		color: $mainClrDark
+		font:
+			size: 17px
+			weight: 300
+
+	&:not(:before)
+		+stretch($panel-header-height)
+		height: auto
+		overflow: auto
+		overflow-x: hidden
+
+	&.nopadding:before
+		padding-left: 15px
+
+	&.nopadding
+		padding-left: 0
+		padding-right: 0
+		padding-bottom: 0
+
+	.discard-btn
+		+stretch(0, 0, auto, auto)
+		width: 35px
+		height: 35px
+
+		background:
+			image: url(inline-image('img/close.png'))
+			position: right 5px top 5px
+			size: 20px auto
+			color: #f1f1f1
+			repeat: no-repeat
+
+		border: 1px solid transparent
+		+border-radius(5px)
+		margin: 8px
+		cursor: pointer
+
+		&:hover
+			border-color: #c9c9c9
+
+	.table_container
+		position: relative
+		height: auto
+		height: 55vh
+		background: white
+		overflow: auto
+
+	a
+		text-decoration: none
+	h2
+		font-weight: 400
+		margin: 7px 0
+		font-size: 15px
+	p
+		font-size: 14px
+
+	.fullspace
+		margin:
+			top: -5px
+			left: 0
+			right: 0
+			bottom: -20px
+
+	.fifty, .third
+		padding-right: 20px
+
+	select
+		&[name=vote_n]
+			float: left
+			width: 40px
+			padding: 5px 5px
+			margin-bottom: 10px
+			margin-right: 5px
+		&[name=vote_s]
+			width: 35px
+			padding: 5px 5px
+
+	.btn
+		float: left
+		width: auto
+		background: none
+
+		padding: 6px 25px
+		border: 1px solid $mainClr
+		+border-radius(5px)
+		margin-right: 10px
+
+		text:
+			align: center
+			transform: uppercase
+
+		color: $mainClr
+
+		font:
+			family: 'Yantramanav', sans-serif
+			weight: 300
+			size: 15px
+
+		cursor: pointer
+
+		&:hover
+			background: $mainClr
+			color: white
+
+		&.red
+			border: 1px solid #c0392b
+			color: #c0392b
+			&:hover
+				background: #c0392b
+				color: white
+
+		&.grey
+			border: 1px solid #555
+			color: #555
+			&:hover
+				background: #555
+				color: white
+
+		&.full
+			width: 95%
+		&.half
+			width: 47%
+
+	&.bigger
+		width: 600px
+		margin: 10% auto
+		.form-item-container .list-inline
+			max-height: 240px
+
+	&.biggest
+		width: 700px
+		.form-item-container .list-inline
+			max-height: 240px
+
+	&.up
+		margin-top: 20px !important
+
+	input:not[type='submit'], textarea, select
+		padding: 5px 10px
+		border: 1px solid #d1d1d1
+		+border-radius(0)
+		font-size: 16px
+
+	textarea
+		width: 100%
+		resize: none
+
+	select
+		width: auto
+		max-width: $nav-width
+		background: white inline-image('img/arrowdown.gif') no-repeat 98% 50%
+
+		padding-right: 20px
+		+appearance(none)
+
+		&, option
+			font-family: 'Lato'
+			font-weight: 400
+			font-size: 15px
+
+		&.full
+			width: 100%
+			clear: both
+
+		.option-btn.onTopBar
+			+stretch(10px,60px)
+			padding: 4px 10px
+			+border-radius(0px)
+
+	.checkbox_list
+		width: 100%
+		height: 245px
+		background: #e0e0e0
+		border: 1px solid #ddd
+		overflow: auto
+
+	table.data_grid
+		td .option-btn:first-child
+			margin-bottom: 5px
+
+	.panel-footer
+		+stretch(auto)
+		background: white
+		padding: 12px 20px
+		border-top: 1px solid #eee

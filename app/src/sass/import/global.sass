@@ -1,0 +1,221 @@
+// Compass _____________________________________________________________________
+@import compass
+@import compass/layout
+
+// Settings and basics _________________________________________________________
+@import vars
+
+// Fonts _______________________________________________________________________
+@import font-awesome
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,600|Yantramanav)
+
+// Selection ___________________________________________________________________
+*
+  +box-sizing(border-box)
+  letter-spacing: 1px
+
+::selection
+  background: none
+::-moz-selection
+  background: none
+
+/*  General ____________________________________________________________________
+html, body
+  height: 100%
+  background: #eee
+
+body
+  overflow-x: scroll
+  margin: 0
+  padding: 0
+  font:
+    family: 'Lato', sans-serif
+    weight: 400
+
+b
+  font:
+    family: 'Lato', sans-serif
+    weight: 700
+
+.fa
+  padding-right: 10px
+
+h3 a
+  color: inherit
+
+h1, h2, h3, h4, h5, h6
+  &.green
+    color: #27ae60
+  &.red
+    color: #e74c3c
+  &.blue
+    color: #2980b9
+  &.purple
+    color: #8e44ad
+
+main
+  background: #e0e0e0
+
+  padding: 0
+  margin: 0
+
+  cursor: default
+
+main
+  &#page
+    position: relative
+  h3
+    margin-left: 15px
+
+hr
+  height: 0
+  border: none
+  border-bottom: 1px solid #ccc
+  margin-bottom: 20px
+
+.hide
+  display: none
+
+.clear
+  clear: both
+
+.right
+  float: right
+
+.visible
+  display: block
+
+.fifty
+  float: left
+  width: 50%
+
+.third
+  float: left
+  width: 33.33333%
+
+.uppercase
+  text-transform: uppercase
+
+// Input and forms _____________________________________________________________
+.in_group
+  position: relative
+  margin: 6px 0
+  font:
+    family: 'Yantramanav', sans-serif
+    weight: 300
+  font-size: 15px
+  &:before, &::before
+    content: attr(label)
+
+input, select, textarea
+  width: 100%
+  background: none
+  padding: 4px 0
+  border: none
+  border-bottom: 1px solid #ddd
+  font-size: 15px
+  +border-radius(0)
+  &:focus
+    outline-width: 0px
+    border-color: $mainClr
+  &::selection
+    background: #e0e0e0
+  &::-moz-selection
+    background: #e0e0e0
+
+select
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  option
+    background: white
+    border: none
+    +border-radius(0)
+    padding: 10px
+    font-size: 100px
+
+input[type="date"]
+  width: 95%
+  background:
+    color: white
+    image: url(inline-image("img/calendar.png"))
+    repeat: no-repeat
+    size: 20px 20px
+    position: 98% 50%
+  cursor: pointer
+
+textarea
+  padding: 12px 0
+
+.checkbox
+  width: 25px
+  position: relative
+  margin: 0 10px 0 0
+  float: left
+
+  label
+    +stretch(0,auto,auto,0)
+    width: 25px
+    height: 25px
+    background: white
+
+    border: 1px solid #ddd
+    +border-radius(50px)
+    cursor: pointer
+
+    &:after
+      +stretch(6px,auto,auto,6px)
+      position: absolute
+      width: 9px
+      height: 5px
+      background: transparent
+
+      border: 3px solid $mainClrDark
+      border-top: none
+      border-right: none
+
+      opacity: 0
+      content: ''
+      +rotate(-45deg)
+
+      &:hover::after
+        opacity: 0
+
+  input[type=checkbox]:checked + label:after
+    opacity: 1
+
+.ui-autocomplete
+  max-height: 100px
+  overflow:
+    x: hidden
+    y: auto
+  z-index: 9999
+
+// Loading _____________________________________________________________________
+#loading
+  pointer-events: none
+  webkit-pointer-events: none
+  -moz-pointer-events: none
+
+  user-select: none
+  -moz-user-select: none
+  -webkit-user-select: none
+
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  height: 100%
+  width: 100%
+
+  background:
+    image: url(inline-image('img/loading.gif'))
+    color: #eee
+    repeat: no-repeat
+    position: center
+
+  margin: auto
+
+  overflow: hidden
+  z-index: 9999

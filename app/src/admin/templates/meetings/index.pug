@@ -1,0 +1,59 @@
+#info-bar(ng-bind="$e.date | date: 'EEEE d MMMM'")
+
+panel(p-name='new', p-bar='false')
+panel(p-name='edit')
+confirm-removal(msg='delete-meeting')
+
+section(ng-init="sort=['date',true]")
+  article
+    .right
+      .option-btn(data-panel='new')
+        icn(n='plus-circle')
+        span(translate='add')
+    h1(translate='meetings', <='', h1='')
+  .container
+    no-data(ng-if='!!!data.meetings.length')
+    article(ng-if='!!data.meetings.length')
+      table.data_grid
+        tr
+          td.little
+            icn(n='calendar-o')
+            sort(by='date')
+          td.little(translate='hour')
+          td
+            input(type='text',
+									ng-model='query.teacher',
+									placeholder="{{ 'teacher' | translate}}")
+            sort(by='teacher')
+          td.little(translate='spaces')
+          td.subject(translate='booked')
+          td.little
+          td.little
+          td.little
+        tr(ng-repeat='meeting in data.meetings\
+        | orderBy	: sort[0] : sort[1]\
+        | filter		:	query')
+          td.little.date
+            span(ng-bind="meeting.date | date: 'd'")
+            span(ng-bind="meeting.date | date: 'MMM'")
+          td.little
+            span(ng-if="meeting.time[0] != ''")
+              span(ng-bind='meeting.time[0]')
+              | :
+              span(ng-bind='meeting.time[1]')
+          td(ng-bind='meeting.teacher')
+          td.little(ng-bind='meeting.people')
+          td.subject(ng-bind='meeting.bookedCount')
+          td.little
+            .icon-btn.green(ng-click='select(meeting)',
+														data-panel='info',
+														ng-if='meeting.bookedCount > 0')
+              icn(n='list-ul')
+          td.little
+            .icon-btn(ng-click='select(meeting)', data-panel='edit')
+              tooltip(t='edit')
+              icn(n='edit')
+          td.little
+            .icon-btn.red(ng-click='select(meeting)', data-panel='remove')
+              tooltip(t='remove')
+              | X

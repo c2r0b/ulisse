@@ -1,0 +1,252 @@
+table
+	width: 100%
+	padding: 0
+	border-collapse: collapse
+	margin: 0
+
+	tr
+		width: 100%
+		min-width: 100%
+		background: white
+
+		td
+			width: auto
+			height: 50px
+			background: white
+
+			padding: 7px 15px
+			margin: 0
+
+			text-align: center
+			font-size: 15px
+			letter-spacing: 2px
+
+			&.little
+				width: 80px
+				padding: 0
+				text-align: center
+				font-size: 18px
+				input
+					width: 30px
+
+			&.check
+				width: 30px
+				padding: 0 10px
+				text-align: center
+				.checkbox label
+					background: white
+
+			&.subject
+				width: 140px
+				padding: inherit 10px
+				overflow: hidden
+				input
+					width: 60px
+
+			&.title
+				width: 220px
+				padding: inherit 10px
+				overflow: hidden
+				input
+					width: 150px
+
+			&.bday
+				background:
+					image: url(inline-image('img/cake-icon.png')) !important
+					position: top 15px left 10px !important
+					repeat: no-repeat !important
+					size: 25px 25px !important
+
+			&.data_part
+				width: auto
+				padding: 0
+
+			&.identifier
+				background: #f9f9f9 !important
+				color: $mainClrDark
+
+			&.mark
+				border-bottom: 2px solid !important
+				// types
+				@each $type in $markTypes
+					&.type#{index($markTypes, $type) - 1}
+						border-bottom-color: $type !important
+
+			&.textMark
+				font-family: 'Open Sans', sans-serif
+
+			&.redMark
+				color: $red
+
+			&.date
+				position: relative
+
+				span:nth-child(1)
+					+stretch(auto, 0px, 10px, 0px)
+					font-size: 18px
+					color: $mainClrDark
+					padding: 12px 0
+
+				span:nth-child(2)
+					+stretch(auto, 0, 0, 0)
+					padding: 2px 0
+					border-top: 1px solid #ddd
+					font-size: 12px
+					text-transform: uppercase
+					display: block
+
+			b
+				font:
+					family: 'Open Sans', sans-serif
+					weight: 600
+					size: 14px
+
+			&.icon
+				width: 55px
+				height: 55px
+				padding: 7px 5px 0 5px
+				img
+					width: 100%
+					height: 100%
+
+	&.data_grid
+		background: white
+		border:
+			top: 1px solid #ececec
+			right: 1px solid #ececec
+		border-collapse: collapse
+
+		tr
+			border-bottom: 1px solid #ececec
+			border-left: 1px solid #ececec
+
+			&:not(:first-child)
+				position: relative
+				display: table
+
+				&:hover
+					border-left-color: $mainClrDark
+					td
+						background: #f6f6f9 !important
+
+				td
+					background: white
+					&:not(:first-child)
+						border-left: 2px solid #ececec
+					&:not(:last-child)
+						border-right: 2px solid #ececec
+
+					ul
+						list-style: circle
+						li
+							padding: 0
+
+				&:nth-child(even) td
+					background: #f9f9f9
+
+			&:first-child
+				height: 50px
+
+				font:
+					family: 'Open Sans', sans-serif
+					weight: 400
+				color: $mainClrDark
+
+				display: table
+				z-index: 9994
+
+				td
+					padding: 8px 10px
+					border: none
+					border-bottom: 1px solid $mainClr
+					font-size: 13px
+					text-transform: uppercase
+					.fa
+						padding: 7px 0 0 12px
+						color: $mainClrDark
+					&:not(:first-child)
+						border-left: 1px solid #e0e0e0
+					&:not(:last-child)
+						border-right: 1px solid #e0e0e0
+
+			&.disabled td
+				background: #ECF0F1
+				+transition
+
+			td
+				&.no
+					background: #F00
+					color: white
+				&.no-align
+					text-align: left
+
+		::-webkit-input-placeholder
+			color:    $mainClrDark
+		:-moz-placeholder
+			color:    $mainClrDark
+			opacity:  1
+		::-moz-placeholder
+			color:    $mainClrDark
+			opacity:  1
+		:-ms-input-placeholder
+			color:    $mainClrDark
+		:placeholder-shown
+			color:    $mainClrDark
+
+	tr:first-child
+		input
+			width: 70%
+			max-width: 190px
+			padding: 5px 0
+			font-size: 12px
+			text:
+				transform: uppercase
+				align: left
+
+
+	&.schedule
+		width: 100%
+		overflow: hidden
+
+		tr:not(:first-child) td
+			height: 70px
+			border-right: 1px solid #e0e0e0
+			b
+				font-weight: 400
+				font-size: 15px
+			div
+				margin-top: 5px
+				font-size: 13px
+				&:last-child
+					font-style: italic
+
+		td
+			width: (100vh / 7)
+
+	&.list
+		border: 1px solid #ececec
+		tr
+			margin: 0
+
+			&:nth-child(odd) td
+				background: #f6f6f6
+
+			td
+				height: 40px
+				padding: 0 10px
+				font-size: 14px
+
+				&:first-child
+					font-family: 'Open Sans', sans-serif
+					text-align: left
+
+				a
+					text-decoration: none
+					span
+						color: $mainClr
+						&:hover
+							text-decoration: underline
+
+		&.data_grid tr:first-child
+			background: #e0e0e0
+			color: black

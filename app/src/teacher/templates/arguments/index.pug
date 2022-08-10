@@ -1,0 +1,52 @@
+#info-bar(ng-bind="$e.date | date: 'EEEE d MMMM'")
+
+panel(p-name='new', p-bar='false')
+panel(p-name='edit')
+confirm-removal(msg='del-argument')
+panel(g-type='confirm', p-name='rm-sel', p-bar='false', title='rm-sel', msg='rm-sel-msg', callback='removeSelected()')
+
+section(ng-init="sort=['date',true]")
+  article
+    .right
+      .option-btn(ng-click='showPanel("new")')
+        icn(n='plus')
+        span(translate='add')
+      .option-btn(ng-click='showPanel("rm-sel")')
+        icn(n='remove')
+        span(translate='rm-sel')
+    h1(translate='arguments')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      table.data_grid
+        tr
+          td.check
+            .checkbox
+              input#cbAll.selectAll(type='checkbox')
+              label(for='cbAll')
+          td.little
+            icn(n='calendar-o')
+            sort(by='date')
+          td
+          td.little
+          td.little
+        tr(ng-repeat='el in data | orderBy:sort[0]:sort[1]',
+           ng-click='select(el)')
+          td.check
+            .checkbox
+              input.selection(type='checkbox',
+                              id='cb{{$index}}',
+                              ng-model='el.selected')
+              label(for='cb{{$index}}')
+          td.little.date
+            span(ng-bind="el.date | date: 'd'")
+            span(ng-bind="el.date | date: 'MMM'")
+          td.no-align(ng-bind='el.text')
+          td.little
+            .icon-btn(ng-click='showPanel("edit")')
+              tooltip(t='edit')
+              icn(n='edit')
+          td.little
+            .icon-btn.red(ng-click='showPanel("remove")')
+              tooltip(t='remove')
+              | X

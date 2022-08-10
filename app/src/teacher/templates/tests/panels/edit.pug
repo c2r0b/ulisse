@@ -1,0 +1,25 @@
+.panel.bigger(data-title="{{ 'edit' | translate }}")
+
+  .fifty
+    .in_group(label="{{ 'title' | translate }}")
+      input(type='text', ng-model='$e.title')
+    .in_group(label="{{ 'date' | translate }}")
+      input(type='date', ng-model='$e.date', format-date='')
+    .in_group(label="{{ 'type' | translate}}")
+      br
+      select(name='vote_type', ng-model='$e.type')
+        option(ng-repeat='a in range(4) track by $index',
+               value='{{ $index }}',
+               ng-selected='$e.type == {{ $index }}',
+               translate='mark-type-{{ $index }}')
+
+  .fifty
+    .in_group(label="{{ 'arguments' | translate }}")
+      textarea(draggable='false', rows='6', ng-model='$e.arguments')
+  .clear
+
+  .panel-footer
+    .btn.close(translate='save', ng-click='edit()')
+    .btn.close.red(translate='remove', ng-click='showPanel("remove")')
+
+  .discard-btn(ng-click='closePanel()')

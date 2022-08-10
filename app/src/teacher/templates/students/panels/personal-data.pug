@@ -1,0 +1,46 @@
+.panel.nopadding(data-title="{{'personal-data' | translate}}")
+  .fullspace
+    .table_container
+      table.list
+        tr
+          td(translate='sex')
+          td
+            i.fa.fa-female(ng-if='!sel_student.info.sex')
+            i.fa.fa-male(ng-if='sel_student.info.sex')
+        tr
+          td(translate='birthday')
+          td(ng-bind="sel_student.info.birthday | date : 'd MMMM yyyy'")
+        tr
+          td(translate='birthplace')
+          td
+            a(href='//google.com/maps/place/{{sel_student.info.birthplace}}', target='_blank')
+              span(ng-bind='sel_student.info.birthplace')
+        tr
+          td(translate='state_of_birth')
+          td(ng-bind='sel_student.info.state_of_birth')
+        tr
+          td(translate='tax_code')
+          td(ng-bind='sel_student.info.tax_code')
+        tr
+          td(translate='cap')
+          td
+            a(href='//google.com/maps/place/{{sel_student.info.cap}}', target='_blank')
+              span(ng-bind='sel_student.info.cap')
+        tr
+          td(translate='address')
+          td
+            a(href='//google.com/maps/place/{{sel_student.info.address}}', target='_blank')
+              span(ng-bind='sel_student.info.address')
+        tr
+          td(translate='city_of_residence')
+          td
+            a(href='//google.com/maps/place/{{sel_student.info.city_of_residence}}', target='_blank')
+              span(ng-bind='sel_student.info.city_of_residence')
+        tr
+          td(translate='country')
+          td(ng-bind='sel_student.info.country')
+        tr
+          td(translate='religion')
+          td(translate='religion-{{ sel_student.info.religion }}')
+
+  .discard-btn(ng-click='closePanel()')

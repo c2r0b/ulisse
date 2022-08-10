@@ -1,0 +1,28 @@
+.tooltip
+	display: none
+	position: relative
+	&:after
+		width: 80px
+		background: #333
+		top: 32px
+		color: #fff
+		content: attr(title)
+		left: -40px
+		padding: 7px 10px
+		+border-radius(5px)
+		position: absolute
+		z-index: 98
+		font-size: 12px
+		line-height: 1.0
+	&:before
+		border: solid
+		border-color: #333 transparent
+		border-width: 0 6px 6px 6px
+		top: 26px
+		content: ""
+		left: 50%
+		position: absolute
+		z-index: 99
+
+*:hover > .tooltip
+	display: inline

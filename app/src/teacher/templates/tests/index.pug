@@ -1,0 +1,61 @@
+#info-bar
+  span(ng-bind="$e.date | date: 'd/MM/yyyy'")
+  | 	-
+  span(ng-bind='$e.title')
+
+panel(p-name='new', p-bar='false')
+panel(p-name='edit')
+panel(p-name='results')
+panel(p-name='edit-mark')
+confirm-removal(msg='del-test')
+panel(g-type='confirm',
+			p-name='remove-mark',
+			p-bar='false',
+			title='remove',
+			msg='del-mark',
+			accept-panel='edit-mark',
+			deny-panel='edit-mark',
+			callback='removeMark()')
+
+section(ng-init="sort=['date',true]")
+  article
+    .right
+      .option-btn(ng-click='showPanel("new")')
+        icn(n='plus')
+        span(translate='add')
+    h1(translate='tests')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      .checkbox
+        input#checkboxViewOthers(type='checkbox', ng-model='showOthers')
+        label(for='checkboxViewOthers')
+      span(translate='others-tests')
+    article(ng-if='!!data.length')
+      table.data_grid
+        tr
+          td.little
+            icn(n='calendar-o')
+            sort(by='date')
+          td.subject(translate='subject')
+          td.title(translate='title')
+          td(translate='arguments')
+          td.little
+          td.little
+        tr(ng-repeat='test in data | orderBy:sort[0]:sort[1]', ng-click='select(test)')
+          td.little.date
+            span(ng-bind="test.date | date: 'd'")
+            span(ng-bind="test.date | date: 'MMM yyyy'")
+          td.subject(ng-switch='', on='test.authorIsMe')
+            b(ng-switch-when='1', ng-bind='test.subject')
+            span(ng-switch-default='', ng-bind='test.subject')
+          td.title.mark(class='type{{test.type}}', ng-bind='test.title')
+          td(ng-bind='test.arguments')
+          td.little
+            .icon-btn.black(ng-if='test.authorIsMe', ng-click='getResults(test);showPanel("results")')
+              tooltip(t='results')
+              icn(n='list')
+          td.little
+            .icon-btn(ng-if='test.authorIsMe', ng-click='showPanel("edit")')
+              tooltip(t='edit')
+              icn(n='edit')

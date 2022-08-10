@@ -1,0 +1,29 @@
+.panel.nopadding(data-title="{{'students' | translate}}")
+  .fullspace
+    .table_container
+      table.data_grid
+        tr
+          td.little
+            input(placeholder='id', ng-model='query.id')
+          td
+            input(placeholder="{{ 'surname' | translate }}",
+									ng-model='query.surname')
+          td.subject
+            input(placeholder="{{ 'name' | translate }}",
+									ng-model='query.name')
+          td.little
+        tr(ng-repeat="student in $e.students\
+							        | filter: query\
+							        | orderBy: 'surname'")
+          td.little(ng-bind='student.id')
+          td(ng-bind='student.surname')
+          td.subject(ng-bind='student.name')
+          td.little
+            .icon-btn.red(data-panel='remove-student',
+													ng-click='selectStudent(student)')
+              tooltip(t='remove')
+              | X
+  .panel-footer
+    .btn.close(translate='add',
+							 data-panel='add-student',
+							 ng-click='getSchoolStudents()')

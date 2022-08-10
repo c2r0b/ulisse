@@ -1,0 +1,23 @@
+.panel(data-title="{{'edit' | translate}}")
+
+  .in_group(label="{{ 'mark' | translate}}")
+    br
+    select(name='vote_n',
+           ng-model='$e.vote',
+           ng-options='n for n in marks track by n')
+
+    select(name='vote_s',
+           ng-options='symbol.value as symbol.text for symbol in symbols',
+           ng-model='$e.symbol')
+  .clear
+
+  h2(translate='this-is-a-test-mark')
+
+  .panel-footer
+    .btn.close(ng-click='editTestMark()',
+               translate='save')
+
+    .btn.red(ng-click='showPanel("remove")',
+             translate='remove')
+
+  .discard-btn(ng-click='closePanel()')

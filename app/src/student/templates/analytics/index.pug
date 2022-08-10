@@ -1,0 +1,16 @@
+section
+  article
+    h1(translate='analytics')
+  .container
+    article
+      .fifty
+        h2(translate='marks-trend')
+        linechart(data='marks.data',
+									options='marks.options',
+									style='height:350px')
+      .fifty
+        h2(translate='absences-months-trend')
+        linechart(data='absences.data',
+									options='absences.options',
+									style='height:350px')
+      .clear

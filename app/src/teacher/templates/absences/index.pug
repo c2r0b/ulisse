@@ -1,0 +1,77 @@
+#info-bar(ng-bind='sel_student.name')
+
+panel(p-name='single-justify')
+panel(p-name='remove')
+panel(p-name='multiple-justify')
+panel(p-name='absences-list')
+panel(p-name='delay')
+panel(p-name='entrance')
+panel(p-name='leaving')
+panel(p-name='justified-absence')
+
+panel(g-type='confirm',
+      p-name='remove-selected',
+      title='remove-selected',
+      msg='remove-selected-absences-msg',
+      accept-panel='absences-list',
+      deny-panel='absences-list',
+      callback='removeSelected()')
+
+section(ng-init="sort=['name',false]")
+  article
+    h1(translate='absences')
+  .container
+    no-data(ng-if='!!!data.length')
+    article(ng-if='!!data.length')
+      table.data_grid
+        tr
+          td.little
+            input(type='text', ng-model='query.id', placeholder='id')
+            sort(by='id')
+          td
+            input(type='text', ng-model='query.name',
+                  placeholder="{{ 'name' | translate }}")
+            sort(by='name')
+          td.little
+          td.little
+          td.little
+          td.little
+          td.little
+          td.little
+        tr(ng-repeat='student in data\
+        | orderBy	:	sort[0]:sort[1]\
+        | filter		:	query')
+          td.little(ng-bind='student.id')
+          td(ng-class='{bday: student.isBday}')
+            b(ng-bind='student.name')
+          td.little
+            .icon-btn(ng-class="student.isAbsent ? 'red' : 'grey'",
+                      ng-click='absentToggle(student)')
+              tooltip(t='absent')
+              font(translate='absence-abbreviation')
+          td.little
+            .icon-btn(ng-click='showPanel("absences-list"); selectStudent(student)',
+                      ng-class="{'grey': student.absencesCount == 0}")
+              tooltip(t='justify')
+              font(translate='justify-abbreviation')
+              span(ng-bind='student.absencesCount')
+          td.little
+            .icon-btn.green(ng-click='showPanel("delay"); selectStudent(student)')
+              tooltip(t='delay')
+              icn(n='clock-o')
+              span(ng-bind='student.delays')
+          td.little
+            .icon-btn(ng-click='showPanel("entrance"); selectStudent(student)',
+                      ng-class="student.isAbsent ? 'grey': 'orange'")
+              tooltip(t='entrance')
+              icn(n='sign-in')
+          td.little
+            .icon-btn(ng-click='showPanel("leaving"); selectStudent(student)',
+                      ng-class="student.isAbsent ? 'grey': 'purple'")
+              tooltip(t='leaving')
+              icn(n='sign-out')
+          td.little
+            .icon-btn(ng-click='showPanel("justified-absence"); selectStudent(student)',
+                      ng-class="student.isAbsent ? 'grey': 'black'")
+              tooltip(t='justified-absence')
+              icn(n='check')

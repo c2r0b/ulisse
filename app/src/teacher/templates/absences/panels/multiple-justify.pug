@@ -1,0 +1,13 @@
+.panel(data-title="{{'multiple-justify' | translate}}")
+  h2(translate='justification')
+
+  textarea(ng-model='justification', draggable='false', rows='1')
+
+  .panel-footer
+    .btn(ng-click='justifySelected(); panel = "absences-list"',
+         translate='justify')
+
+    .btn.grey(ng-click='panel = "absences-list"',
+              translate='cancel')
+
+  .discard-btn(ng-click='closePanel()')

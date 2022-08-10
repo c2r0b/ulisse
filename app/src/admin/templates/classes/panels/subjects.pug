@@ -1,0 +1,28 @@
+.panel.nopadding(data-title="{{'teachers-subjects' | translate}}")
+  .fullspace
+    .table_container
+      table.data_grid
+        tr
+          td
+            input(placeholder="{{ 'teacher' | translate }}",
+									ng-model='query.name')
+          td.subject
+            input(placeholder="{{ 'subject' | translate }}",
+									ng-model='query.subject')
+          td.little
+          td.little
+        tr(ng-repeat='subject in $e.subjects | filter: query')
+          td(ng-bind='subject.teacher')
+          td.subject(ng-bind='subject.name')
+          td.little
+            .icon-btn(data-panel='edit-subject',
+											ng-click='selectSubject(subject)')
+              tooltip(t='edit')
+              icn(n='edit')
+          td.little
+            .icon-btn.red(data-panel='remove-subject',
+													ng-click='selectSubject(subject)')
+              tooltip(t='remove')
+              | X
+  .panel-footer
+    .btn.close(translate='add', data-panel='add-subject')
