@@ -16,7 +16,7 @@ $r = mysqli_fetch_assoc(query("
   FROM
     student
   WHERE
-    id = '".$id]."'
+    id = '".$id."'
   LIMIT 1
 "));
 
