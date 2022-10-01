@@ -43,7 +43,7 @@
     "jquery": "^3.1.1",
     "jquery-browserify": "^1.8.1",
     "jquery-ui-browserify": "^1.11.0-pre-seelio",
-    "jsdom": "^9.4.2",
+    "jsdom": "^20.0.0",
     "n3-charts": "^2.0.28",
     "speechkitt": "^0.3.0"
   }
