@@ -1,6 +1,5 @@
 import $ from 'gulp'
 
-import pump from 'pump'
 import argv from 'yargs'
 import del from 'del'
 import fontAwesome from 'node-font-awesome'
@@ -8,10 +7,13 @@ import babelify from 'babelify'
 import compass from 'compass-importer'
 import PHPServer from 'php-built-in-server'
 import browserSync from 'browser-sync'
-import sassInlineImage from 'sass-inline-image'
 
 // gulp-* plugins handler
 $.p = require('gulp-load-plugins')()
+
+import dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+const sass = gulpSass(dartSass);
 
 // production mode indicator
 const production = argv.argv.production
@@ -27,183 +29,152 @@ const tasks = [
   'templates',
   'login',
   'styles',
-  'fonts'
-]
+  'fonts',
+  'redirect',
+  'teacher',
+  'admin',
+  'student'
+];
 
 const scriptTasks = [
   'loginScripts',
   'teacherScripts',
   'adminScripts',
+  'studentScripts',
+  'teacherScripts',
+  'adminScripts',
   'studentScripts'
 ]
 
-if (argv.teacher) {
-  tasks.push('teacher')
-  scriptTasks.push('teacherScripts')
-}
-else if (argv.admin) {
-  tasks.push('admin')
-  scriptTasks.push('adminScripts')
-}
-else if (argv.student) {
-  tasks.push('student')
-  scriptTasks.push('studentScripts')
-}
-
 // shortcut for pump with only source and destination without using filestream
 let exportFiles = (src, dest) => {
-  pump([
-    $.src(src),
-    $.dest(dest)
-  ])
+  return $.src(src)
+    .pipe($.dest(dest));
 }
 
 // GENERAL PURPOSE FUNCTIONS ___________________________________________________
 
 // generate app js file for
 function scripts(dir, dir_dest) {
-  pump(
-    [
-      $.src('src/' + dir + '/index.js'),
-      $.p.bro({
-        transform: [
-          babelify.configure( { presets: ['env'] } ),
-          production ? [ 'uglifyify', { global: true } ] : ''
-        ]
-      }),
-      $.p.rename('app.min.js'),
-      $.dest(dest + '/' + (dir_dest || dir.charAt(0))),
-      bSync.stream()
-    ]
-  )
+  return $.src('src/' + dir + '/index.js')
+    .pipe($.p.bro({
+      transform: [
+        babelify.configure( { presets: ['@babel/preset-env'] } ),
+        production ? [ 'uglifyify', { global: true } ] : ''
+      ]
+    }))
+    .pipe($.p.rename('app.min.js'))
+    .pipe($.dest(dest + '/' + (dir_dest || dir.charAt(0))))
+    .pipe(bSync.stream());
 }
 
 // html to pug templates
 function templates(dir, dir_dest) {
-  pump(
-    [
-      $.src('src/' + dir + '/**/*.pug'),
-      $.p.pug(),
-      $.dest(dest + '/' + (dir_dest || dir.charAt(0))),
-      bSync.stream()
-    ],
-    () => console.error.bind(console)
-  )
+  return $.src('src/' + dir + '/**/*.pug')
+    .pipe($.p.pug())
+    .pipe($.dest(dest + '/' + (dir_dest || dir.charAt(0))))
+    .pipe(bSync.stream());
 }
 
 // GENERAL PURPOSE TASKS _______________________________________________________
 
 // compile sass using compass
 $.task('styles', () => {
-  pump(
-    [
-      $.src('src/sass/*.sass'),
-      $.p.sass(
-        {
-          importer: compass,
-          outputStyle: argv.production ? 'compressed' : 'nested',
-          functions: sassInlineImage({}),
-          includePaths: [fontAwesome.scssPath]
-        }
-      ),
-      $.dest(dest + '/css'),
-      bSync.stream()
-    ],
-    () => $.p.sass.logError
-  )
+  return $.src('src/sass/*.sass')
+    .pipe(sass(
+      {
+        importer: compass,
+        outputStyle: 'compressed',
+        includePaths: [fontAwesome.scssPath]
+      }
+    ))
+    .pipe($.dest(dest + '/css'))
+    .pipe(bSync.stream());
 })
 
 // font awesome
-$.task('fonts', exportFiles(fontAwesome.fonts, dest + '/fonts'))
+$.task('fonts', () => exportFiles(fontAwesome.fonts, dest + '/fonts'))
 
 // general purpose templates
-$.task('templates', templates('templates', 'templates'))
+$.task('templates', () => templates('templates', 'templates'))
 
 // PHP APIs
-$.task('api', exportFiles(['./api/**/*'], dest + '/api'))
+$.task('api', () => exportFiles(['./api/**/*'], dest + '/api'))
 
 // generate translations angular module
 $.task('translations', () => {
-  pump(
-    [
-      $.src('src/locale/*.json'),
-      $.p.angularTranslate(
+   return $.src('src/locale/*.json')
+      .pipe($.p.angularTranslate(
         {
           module: 'ulisseTranslations'
         }
-      ),
-      $.dest('src/temp'),
-      bSync.stream()
-    ]
-  )
+      ))
+      .pipe($.dest('src/temp'))
+      .pipe(bSync.stream());
 })
 
 // STUDENT _____________________________________________________________________
 
-$.task('studentTemplates', templates('student'))
+$.task('studentTemplates', () => templates('student'))
 
-$.task('studentScripts', ['translations','studentTemplates'], scripts('student'))
+$.task('studentScripts', $.series('translations','studentTemplates'), () => scripts('student'))
 
-$.task('student', ['studentScripts', 'studentTemplates'])
+$.task('student', $.series('studentScripts', 'studentTemplates'))
 
 // TEACHER _____________________________________________________________________
 
-$.task('teacherTemplates', templates('teacher'))
+$.task('teacherTemplates', () => templates('teacher'))
 
-$.task('teacherScripts', ['translations','teacherTemplates'], scripts('teacher'))
+$.task('teacherScripts', $.series('translations','teacherTemplates'), () => scripts('teacher'))
 
-$.task('teacher', ['teacherScripts','teacherTemplates'])
+$.task('teacher', $.series('teacherScripts','teacherTemplates'))
 
 // ADMIN _______________________________________________________________________
 
-$.task('adminTemplates', templates('admin'))
+$.task('adminTemplates', () => templates('admin'))
 
-$.task('adminScripts', ['translations', 'adminTemplates'], scripts('admin'))
+$.task('adminScripts', $.series('translations', 'adminTemplates'), () => scripts('admin'))
 
-$.task('admin', ['adminScripts', 'adminTemplates'])
+$.task('admin', $.series('adminScripts', 'adminTemplates'))
 
 // LOGIN _______________________________________________________________________
 
-$.task('loginTemplates', templates('login', 'login'))
+$.task('loginTemplates', () => templates('login', 'login'))
 
-$.task('loginScripts', ['translations'], scripts('login', 'login'))
+$.task('loginScripts', $.series('translations'), () => scripts('login', 'login'))
 
-$.task('login', ['loginScripts', 'loginTemplates'])
+$.task('login', $.series('loginScripts', 'loginTemplates'))
 
 // DEFAULT TASKS _______________________________________________________________
 
 // watch for changes
 $.task('watch', () => {
 
-  if (argv.student) {
-    $.watch('src/student/**/*.js', ['studentScripts']);
-    $.watch('src/student/**/*.pug', ['studentTemplates']);
-  }
-  else if (argv.teacher) {
-    $.watch('src/teacher/**/*.js', ['teacherScripts']);
-    $.watch('src/teacher/**/*.pug', ['teacherTemplates']);
-  }
-  else if (argv.admin) {
-    $.watch('src/admin/**/*.js', ['adminScripts']);
-    $.watch('src/admin/**/*.pug', ['adminTemplates']);
-  }
+  $.watch('src/student/**/*.js', $.series('studentScripts'));
+  $.watch('src/student/**/*.pug', $.series('studentTemplates'));
+  
+  $.watch('src/teacher/**/*.js', $.series('teacherScripts'));
+  $.watch('src/teacher/**/*.pug', $.series('teacherTemplates'));
+  
+  $.watch('src/admin/**/*.js', $.series('adminScripts'));
+  $.watch('src/admin/**/*.pug', $.series('adminTemplates'));
+  
+  $.watch('src/login/**/*.js', $.series('loginScripts'));
+  $.watch('src/login/**/*.pug', $.series('loginTemplates'));
 
-  $.watch('src/login/**/*.js', ['loginScripts']);
-  $.watch('src/login/**/*.pug', ['loginTemplates']);
+  $.watch('src/templates/**/*.pug', $.series('templates'));
 
-  $.watch('src/templates/**/*.pug', ['templates']);
+  $.watch('src/directives/**/*.js', $.series('scripts'));
+  $.watch('src/filters/**/*.js', $.series('scripts'));
+  $.watch('src/services/**/*.js', $.series('scripts'));
 
-  $.watch('src/directives/**/*.js', ['scripts']);
-  $.watch('src/filters/**/*.js', ['scripts']);
-  $.watch('src/services/**/*.js', ['scripts']);
+  $.watch('src/locale/*.json', $.series('translations', 'scripts'));
 
-  $.watch('src/locale/*.json', ['translations', 'scripts']);
-
-  $.watch('src/sass/**/*.sass', ['styles']);
-  $.watch('img/**/*', ['styles']);
+  $.watch('src/sass/**/*.sass', $.series('styles'));
+  $.watch('img/**/*', $.series('styles'));
 });
 
-$.task('scripts', scriptTasks)
+$.task('scripts', $.series(...scriptTasks))
 
 // browser autoreload
 $.task('browser-sync', () => {
@@ -215,7 +186,6 @@ $.task('browser-sync', () => {
 let server = new PHPServer()
 
 $.task('server', () => {
-
   server.on('listening', event => {
   	console.log('[LISTENING]', event.host.address + ':' + event.host.port)
     $.start(['browser-sync'])
@@ -228,20 +198,17 @@ $.task('server', () => {
   server.listen('build', 8010, '127.0.0.1')
 })
 
-// main task
-$.task('default', tasks, () => {
-  // if in development mode start PHP server and changes watchers
-  if (!production)
-    $.start(['server', 'watch'])
-
-  // delete temp files
-  del(['src/temp/'])
-
-  // create redirect to login
+$.task('redirect', () => {
   return $.p.file(
       'index.html',
-      '<meta http-equiv="refresh" content="0;URL=login">',
+      '<meta http-equiv="refresh" content="0;URL=login/">',
       { src: true }
     )
-    .pipe($.dest(dest))
-})
+    .pipe($.dest(dest));
+});
+
+// main task
+$.task('default', $.series(
+  $.parallel(...tasks),
+  $.parallel('watch', 'server')
+)); 
