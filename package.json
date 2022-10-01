@@ -31,20 +31,20 @@
     "php-built-in-server": "^0.1.4",
     "sass": "^1.55.0",
     "uglifyify": "^3.0.4",
-    "yargs": "^6.2.0"
+    "yargs": "^17.6.0"
   },
   "dependencies": {
     "angular": "^1.8.3",
     "angular-route": "^1.8.3",
     "angular-translate": "^2.19.0",
     "annyang": "^2.6.1",
-    "d3": "^4.2.1",
+    "d3": "^7.6.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
     "jquery-browserify": "^1.8.1",
     "jquery-ui-browserify": "^1.11.0-pre-seelio",
     "jsdom": "^9.4.2",
-    "n3-charts": "^2.0.27",
+    "n3-charts": "^2.0.28",
     "speechkitt": "^0.3.0"
   }
 }
