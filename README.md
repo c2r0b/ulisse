@@ -3,6 +3,9 @@ This is a self-hostable digital register for school management. It is meant to h
 
 Developed in AngularJS and PHP in 2016, it has been archived that same year. Since 2022 it has been recovered and open-sourced.
 
+## Features
+- [ ] TBD
+
 ## How to use
 TBD
 
