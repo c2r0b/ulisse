@@ -1,7 +1,6 @@
 import $ from 'gulp'
 
 import argv from 'yargs'
-import del from 'del'
 import fontAwesome from 'node-font-awesome'
 import babelify from 'babelify'
 import compass from 'compass-importer'
@@ -33,7 +32,8 @@ const tasks = [
   'redirect',
   'teacher',
   'admin',
-  'student'
+  'student',
+  'api'
 ];
 
 const scriptTasks = [
@@ -109,7 +109,7 @@ $.task('translations', () => {
           module: 'ulisseTranslations'
         }
       ))
-      .pipe($.dest('src/temp'))
+      .pipe($.dest('temp'))
       .pipe(bSync.stream());
 })
 
@@ -205,6 +205,11 @@ $.task('redirect', () => {
       { src: true }
     )
     .pipe($.dest(dest));
+});
+
+$.task('api', () => {
+  return $.src(['api/**/*'])
+    .pipe($.dest('build/api'));
 });
 
 // main task
